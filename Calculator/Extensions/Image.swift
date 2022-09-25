@@ -14,4 +14,13 @@ extension UIImage {
   static let ivanThird = UIImage(named: "ivanThird")
   static let ivanFourth = UIImage(named: "ivanFourth")
   static let ivanFifth = UIImage(named: "ivanFifth")
+  
+  static let searchFood = UIImage(named: "meal")
+  static let searchFoodTapped = UIImage(named: "mealTapped")
+  
+  static let selectedFood = UIImage(named: "calculator")
+  static let selectedFoodTapped = UIImage(named: "calculatorTapped")
+  
+  static let user = UIImage(named: "user")
+  static let userTapped = UIImage(named: "userTapped")
 }
