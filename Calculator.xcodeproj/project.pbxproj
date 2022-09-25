@@ -12,6 +12,20 @@
 		CE02435628D9BB3600DB83E2 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435328D9B98A00DB83E2 /* FoodTableViewCell.swift */; };
 		CE02435928D9BC9900DB83E2 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435828D9BC9900DB83E2 /* Color.swift */; };
 		CE02435B28D9C0E300DB83E2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435A28D9C0E300DB83E2 /* Image.swift */; };
+		CE114C1B28DCAD7C00F3DD6A /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C1A28DCAD7C00F3DD6A /* LoginCoordinator.swift */; };
+		CE114C1D28DCAEF200F3DD6A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C1C28DCAEF200F3DD6A /* LoginViewController.swift */; };
+		CE114C1F28DCAF0800F3DD6A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C1E28DCAF0800F3DD6A /* LoginViewModel.swift */; };
+		CE114C2128DCB21800F3DD6A /* MainModuleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2028DCB21800F3DD6A /* MainModuleCoordinator.swift */; };
+		CE114C2328DCB2DA00F3DD6A /* MainModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2228DCB2DA00F3DD6A /* MainModuleViewController.swift */; };
+		CE114C2528DCB2E900F3DD6A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2428DCB2E900F3DD6A /* MainViewModel.swift */; };
+		CE114C2728DCB3C300F3DD6A /* SecondModuleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2628DCB3C300F3DD6A /* SecondModuleCoordinator.swift */; };
+		CE114C2928E07A2000F3DD6A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2828E07A2000F3DD6A /* SecondViewController.swift */; };
+		CE114C2B28E07A3400F3DD6A /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2A28E07A3400F3DD6A /* SecondViewModel.swift */; };
+		CE114C2D28E07AAA00F3DD6A /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2C28E07AAA00F3DD6A /* DetailedViewController.swift */; };
+		CE114C2F28E07C8C00F3DD6A /* DetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C2E28E07C8C00F3DD6A /* DetailedViewModel.swift */; };
+		CE114C3128E07D6900F3DD6A /* TabCoordinatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3028E07D6900F3DD6A /* TabCoordinatorHelper.swift */; };
+		CE114C3428E0837800F3DD6A /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3328E0837800F3DD6A /* TabCoordinator.swift */; };
+		CE114C3628E0E14C00F3DD6A /* FoodDetailedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3528E0E14C00F3DD6A /* FoodDetailedCoordinator.swift */; };
 		CE1CBC94289D80E600859E0D /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC93289D80E600859E0D /* UserViewController.swift */; };
 		CE1CBC96289D80F500859E0D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC95289D80F500859E0D /* UserViewModel.swift */; };
 		CE1CBC98289F99AD00859E0D /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC97289F99AD00859E0D /* UserCoordinator.swift */; };
@@ -30,20 +44,6 @@
 		CED2B240288D89EB00C92578 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B23F288D89EB00C92578 /* CoordinatorProtocol.swift */; };
 		CED2B242288D8A0400C92578 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B241288D8A0400C92578 /* CoordinatorFinishDelegate.swift */; };
 		CED2B244288D8A1B00C92578 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B243288D8A1B00C92578 /* AppCoordinator.swift */; };
-		CED2B246288D8A4A00C92578 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B245288D8A4A00C92578 /* LoginCoordinator.swift */; };
-		CED2B248288D8AC800C92578 /* TabCoordinatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B247288D8AC800C92578 /* TabCoordinatorHelper.swift */; };
-		CED2B24A288D8AD000C92578 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B249288D8AD000C92578 /* TabCoordinator.swift */; };
-		CED2B24C288D8AD600C92578 /* MainModuleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B24B288D8AD500C92578 /* MainModuleCoordinator.swift */; };
-		CED2B24E288D8ADB00C92578 /* SeconModuleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B24D288D8ADB00C92578 /* SeconModuleCoordinator.swift */; };
-		CED2B250288D8AE000C92578 /* FoodDetailedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B24F288D8AE000C92578 /* FoodDetailedCoordinator.swift */; };
-		CED2B260288D8C5000C92578 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B25F288D8C5000C92578 /* LoginViewController.swift */; };
-		CED2B262288D8C5800C92578 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B261288D8C5800C92578 /* LoginViewModel.swift */; };
-		CED2B264288D8C5E00C92578 /* MainModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B263288D8C5E00C92578 /* MainModuleViewController.swift */; };
-		CED2B26A288D8C7400C92578 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B269288D8C7400C92578 /* MainViewModel.swift */; };
-		CED2B26E288D8C8E00C92578 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B26D288D8C8E00C92578 /* SecondViewController.swift */; };
-		CED2B270288D8C9700C92578 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B26F288D8C9600C92578 /* SecondViewModel.swift */; };
-		CED2B272288D8C9C00C92578 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B271288D8C9C00C92578 /* DetailedViewController.swift */; };
-		CED2B274288D8CA300C92578 /* DetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B273288D8CA300C92578 /* DetailedViewModel.swift */; };
 		CED4EB6D2893EFC7008A39C6 /* FoodSelectedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EB6C2893EFC7008A39C6 /* FoodSelectedModel.swift */; };
 		CED4EB6F2893F47F008A39C6 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EB6E2893F47F008A39C6 /* EmptyView.swift */; };
 		CED4EB7128947ECB008A39C6 /* FoodSelectedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EB7028947ECB008A39C6 /* FoodSelectedTableViewCell.swift */; };
@@ -68,6 +68,20 @@
 		CE02435328D9B98A00DB83E2 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		CE02435828D9BC9900DB83E2 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE02435A28D9C0E300DB83E2 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		CE114C1A28DCAD7C00F3DD6A /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		CE114C1C28DCAEF200F3DD6A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE114C1E28DCAF0800F3DD6A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CE114C2028DCB21800F3DD6A /* MainModuleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleCoordinator.swift; sourceTree = "<group>"; };
+		CE114C2228DCB2DA00F3DD6A /* MainModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleViewController.swift; sourceTree = "<group>"; };
+		CE114C2428DCB2E900F3DD6A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		CE114C2628DCB3C300F3DD6A /* SecondModuleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondModuleCoordinator.swift; sourceTree = "<group>"; };
+		CE114C2828E07A2000F3DD6A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		CE114C2A28E07A3400F3DD6A /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
+		CE114C2C28E07AAA00F3DD6A /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		CE114C2E28E07C8C00F3DD6A /* DetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewModel.swift; sourceTree = "<group>"; };
+		CE114C3028E07D6900F3DD6A /* TabCoordinatorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorHelper.swift; sourceTree = "<group>"; };
+		CE114C3328E0837800F3DD6A /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		CE114C3528E0E14C00F3DD6A /* FoodDetailedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailedCoordinator.swift; sourceTree = "<group>"; };
 		CE1CBC93289D80E600859E0D /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CE1CBC95289D80F500859E0D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		CE1CBC97289F99AD00859E0D /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
@@ -88,20 +102,6 @@
 		CED2B23F288D89EB00C92578 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		CED2B241288D8A0400C92578 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
 		CED2B243288D8A1B00C92578 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		CED2B245288D8A4A00C92578 /* LoginCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginCoordinator.swift; path = ../../../../Calculator/Calculator/Coordinator/LoginCoordinator.swift; sourceTree = "<group>"; };
-		CED2B247288D8AC800C92578 /* TabCoordinatorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabCoordinatorHelper.swift; path = ../../../../Calculator/Calculator/Coordinator/TabCoordinatorHelper.swift; sourceTree = "<group>"; };
-		CED2B249288D8AD000C92578 /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabCoordinator.swift; path = ../../../../Calculator/Calculator/Coordinator/TabCoordinator.swift; sourceTree = "<group>"; };
-		CED2B24B288D8AD500C92578 /* MainModuleCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainModuleCoordinator.swift; path = ../../../../Calculator/Calculator/Coordinator/MainModuleCoordinator.swift; sourceTree = "<group>"; };
-		CED2B24D288D8ADB00C92578 /* SeconModuleCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeconModuleCoordinator.swift; path = ../../../../Calculator/Calculator/Coordinator/SeconModuleCoordinator.swift; sourceTree = "<group>"; };
-		CED2B24F288D8AE000C92578 /* FoodDetailedCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodDetailedCoordinator.swift; path = ../../../../Calculator/Calculator/Coordinator/FoodDetailedCoordinator.swift; sourceTree = "<group>"; };
-		CED2B25F288D8C5000C92578 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../../../../../Calculator/Calculator/Login/View/LoginViewController.swift; sourceTree = "<group>"; };
-		CED2B261288D8C5800C92578 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = ../../../../../Calculator/Calculator/Login/ViewModel/LoginViewModel.swift; sourceTree = "<group>"; };
-		CED2B263288D8C5E00C92578 /* MainModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainModuleViewController.swift; path = ../../../../../Calculator/Calculator/Main/View/MainModuleViewController.swift; sourceTree = "<group>"; };
-		CED2B269288D8C7400C92578 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewModel.swift; path = ../../../../../Calculator/Calculator/Main/ViewModel/MainViewModel.swift; sourceTree = "<group>"; };
-		CED2B26D288D8C8E00C92578 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = ../../../../../Calculator/Calculator/SecondModule/View/SecondViewController.swift; sourceTree = "<group>"; };
-		CED2B26F288D8C9600C92578 /* SecondViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondViewModel.swift; path = ../../../../../Calculator/Calculator/SecondModule/ViewModel/SecondViewModel.swift; sourceTree = "<group>"; };
-		CED2B271288D8C9C00C92578 /* DetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailedViewController.swift; path = ../../../../../Calculator/Calculator/DetailedModule/View/DetailedViewController.swift; sourceTree = "<group>"; };
-		CED2B273288D8CA300C92578 /* DetailedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailedViewModel.swift; path = ../../../../../Calculator/Calculator/DetailedModule/ViewModel/DetailedViewModel.swift; sourceTree = "<group>"; };
 		CED4EB6C2893EFC7008A39C6 /* FoodSelectedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSelectedModel.swift; sourceTree = "<group>"; };
 		CED4EB6E2893F47F008A39C6 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		CED4EB7028947ECB008A39C6 /* FoodSelectedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSelectedTableViewCell.swift; sourceTree = "<group>"; };
@@ -294,14 +294,14 @@
 				CECD07792892CA0D00D5F637 /* BaseCoordinator.swift */,
 				CED2B243288D8A1B00C92578 /* AppCoordinator.swift */,
 				CEFE5FCE28916F9E007E7631 /* StartCoordinator.swift */,
-				CED2B245288D8A4A00C92578 /* LoginCoordinator.swift */,
 				CEFE5FD92891853B007E7631 /* RegistrationCoordinator.swift */,
-				CED2B247288D8AC800C92578 /* TabCoordinatorHelper.swift */,
-				CED2B249288D8AD000C92578 /* TabCoordinator.swift */,
-				CED2B24B288D8AD500C92578 /* MainModuleCoordinator.swift */,
-				CED2B24D288D8ADB00C92578 /* SeconModuleCoordinator.swift */,
+				CE114C1A28DCAD7C00F3DD6A /* LoginCoordinator.swift */,
+				CE114C3028E07D6900F3DD6A /* TabCoordinatorHelper.swift */,
+				CE114C3328E0837800F3DD6A /* TabCoordinator.swift */,
+				CE114C2028DCB21800F3DD6A /* MainModuleCoordinator.swift */,
+				CE114C2628DCB3C300F3DD6A /* SecondModuleCoordinator.swift */,
 				CE1CBC97289F99AD00859E0D /* UserCoordinator.swift */,
-				CED2B24F288D8AE000C92578 /* FoodDetailedCoordinator.swift */,
+				CE114C3528E0E14C00F3DD6A /* FoodDetailedCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -339,7 +339,7 @@
 		CED2B257288D8C1D00C92578 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B261288D8C5800C92578 /* LoginViewModel.swift */,
+				CE114C1E28DCAF0800F3DD6A /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -347,7 +347,7 @@
 		CED2B258288D8C2400C92578 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B25F288D8C5000C92578 /* LoginViewController.swift */,
+				CE114C1C28DCAEF200F3DD6A /* LoginViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -355,7 +355,7 @@
 		CED2B259288D8C2B00C92578 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B269288D8C7400C92578 /* MainViewModel.swift */,
+				CE114C2428DCB2E900F3DD6A /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -363,7 +363,7 @@
 		CED2B25A288D8C3000C92578 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B263288D8C5E00C92578 /* MainModuleViewController.swift */,
+				CE114C2228DCB2DA00F3DD6A /* MainModuleViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,7 +371,7 @@
 		CED2B25B288D8C3400C92578 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B26F288D8C9600C92578 /* SecondViewModel.swift */,
+				CE114C2A28E07A3400F3DD6A /* SecondViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -379,7 +379,7 @@
 		CED2B25C288D8C3900C92578 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B26D288D8C8E00C92578 /* SecondViewController.swift */,
+				CE114C2828E07A2000F3DD6A /* SecondViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 		CED2B25D288D8C3D00C92578 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B273288D8CA300C92578 /* DetailedViewModel.swift */,
+				CE114C2E28E07C8C00F3DD6A /* DetailedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -395,7 +395,7 @@
 		CED2B25E288D8C4100C92578 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B271288D8C9C00C92578 /* DetailedViewController.swift */,
+				CE114C2C28E07AAA00F3DD6A /* DetailedViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -581,51 +581,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE02435628D9BB3600DB83E2 /* FoodTableViewCell.swift in Sources */,
-				CED2B260288D8C5000C92578 /* LoginViewController.swift in Sources */,
 				CEFE5FD628917952007E7631 /* RegistrationViewModel.swift in Sources */,
 				CED2B240288D89EB00C92578 /* CoordinatorProtocol.swift in Sources */,
-				CED2B26E288D8C8E00C92578 /* SecondViewController.swift in Sources */,
-				CED2B250288D8AE000C92578 /* FoodDetailedCoordinator.swift in Sources */,
+				CE114C2128DCB21800F3DD6A /* MainModuleCoordinator.swift in Sources */,
 				CEFE5FCB288FFD28007E7631 /* StartViewController.swift in Sources */,
-				CED2B272288D8C9C00C92578 /* DetailedViewController.swift in Sources */,
+				CE114C2528DCB2E900F3DD6A /* MainViewModel.swift in Sources */,
 				CEFE5FCF28916F9E007E7631 /* StartCoordinator.swift in Sources */,
-				CED2B270288D8C9700C92578 /* SecondViewModel.swift in Sources */,
-				CED2B264288D8C5E00C92578 /* MainModuleViewController.swift in Sources */,
+				CE114C2728DCB3C300F3DD6A /* SecondModuleCoordinator.swift in Sources */,
 				CE1CBC98289F99AD00859E0D /* UserCoordinator.swift in Sources */,
-				CED2B26A288D8C7400C92578 /* MainViewModel.swift in Sources */,
+				CE114C2B28E07A3400F3DD6A /* SecondViewModel.swift in Sources */,
+				CE114C2F28E07C8C00F3DD6A /* DetailedViewModel.swift in Sources */,
 				CED2B222288D86CC00C92578 /* Calculator.xcdatamodeld in Sources */,
 				CEFE5FDA2891853B007E7631 /* RegistrationCoordinator.swift in Sources */,
 				CED4EB7128947ECB008A39C6 /* FoodSelectedTableViewCell.swift in Sources */,
 				CE02435128D907A700DB83E2 /* MTView.swift in Sources */,
 				CE02435928D9BC9900DB83E2 /* Color.swift in Sources */,
-				CED2B246288D8A4A00C92578 /* LoginCoordinator.swift in Sources */,
 				CED2B242288D8A0400C92578 /* CoordinatorFinishDelegate.swift in Sources */,
-				CED2B274288D8CA300C92578 /* DetailedViewModel.swift in Sources */,
 				CED2B23B288D882E00C92578 /* NetworkAPI.swift in Sources */,
 				CEFE5FD82891796C007E7631 /* Strings.swift in Sources */,
+				CE114C1B28DCAD7C00F3DD6A /* LoginCoordinator.swift in Sources */,
 				CED2B218288D86CC00C92578 /* AppDelegate.swift in Sources */,
 				CED2B237288D87D800C92578 /* CustomError.swift in Sources */,
 				CE02435B28D9C0E300DB83E2 /* Image.swift in Sources */,
 				CED7CE9D28BCF39400AFEA49 /* AppUser.swift in Sources */,
 				CE1CBC9A289F9D8100859E0D /* SwitchTableViewCell.swift in Sources */,
-				CED2B262288D8C5800C92578 /* LoginViewModel.swift in Sources */,
+				CE114C2928E07A2000F3DD6A /* SecondViewController.swift in Sources */,
 				CECD077A2892CA0D00D5F637 /* BaseCoordinator.swift in Sources */,
 				CEDB352728A29F9500F0C532 /* AlertController.swift in Sources */,
 				CED4EB6D2893EFC7008A39C6 /* FoodSelectedModel.swift in Sources */,
+				CE114C3428E0837800F3DD6A /* TabCoordinator.swift in Sources */,
 				CED2B244288D8A1B00C92578 /* AppCoordinator.swift in Sources */,
-				CED2B248288D8AC800C92578 /* TabCoordinatorHelper.swift in Sources */,
+				CE114C2328DCB2DA00F3DD6A /* MainModuleViewController.swift in Sources */,
 				CEFE5FCD288FFD36007E7631 /* StartViewModel.swift in Sources */,
 				CE1CBC94289D80E600859E0D /* UserViewController.swift in Sources */,
-				CED2B24E288D8ADB00C92578 /* SeconModuleCoordinator.swift in Sources */,
+				CE114C1D28DCAEF200F3DD6A /* LoginViewController.swift in Sources */,
+				CE114C3628E0E14C00F3DD6A /* FoodDetailedCoordinator.swift in Sources */,
 				CED4EB6F2893F47F008A39C6 /* EmptyView.swift in Sources */,
 				CEFE5FD428917941007E7631 /* RegistrationViewController.swift in Sources */,
 				CED2B23D288D884A00C92578 /* NetworkService.swift in Sources */,
 				CE1CBC96289D80F500859E0D /* UserViewModel.swift in Sources */,
+				CE114C2D28E07AAA00F3DD6A /* DetailedViewController.swift in Sources */,
 				CED7CE9F28BCF55400AFEA49 /* FoodSelected.swift in Sources */,
+				CE114C1F28DCAF0800F3DD6A /* LoginViewModel.swift in Sources */,
+				CE114C3128E07D6900F3DD6A /* TabCoordinatorHelper.swift in Sources */,
 				CE1CBC9C289F9D9800859E0D /* ExitTableViewCell.swift in Sources */,
 				CED9229C289800C300F9832B /* TotalCaloriesView.swift in Sources */,
-				CED2B24A288D8AD000C92578 /* TabCoordinator.swift in Sources */,
-				CED2B24C288D8AD600C92578 /* MainModuleCoordinator.swift in Sources */,
 				CE585C042892E25000AC2D70 /* LoadingView.swift in Sources */,
 				CED2B239288D87F100C92578 /* FoodModel.swift in Sources */,
 			);
