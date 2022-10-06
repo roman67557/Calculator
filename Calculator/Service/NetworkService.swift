@@ -22,9 +22,7 @@ class NetworkService: NetworkAPI {
       request
         .validate()
         .responseJSON { result in
-          
 //          print(result)
-          
           switch result.result {
             
           case .success(_):

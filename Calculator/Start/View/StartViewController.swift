@@ -13,7 +13,6 @@ class StartViewController: UIViewController {
   var viewModel: StartViewModelProtocol?
   
   private let buttons = (loginButton: UIButton(), registrationButton: UIButton())
-  private let imageView = UIImageView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,7 +28,6 @@ extension StartViewController {
     
     self.view.backgroundColor = .main
     addSubViews()
-    setupImageView()
     setupLoginButton()
     setupRegistrationButton()
     setupConstraints()
@@ -37,19 +35,11 @@ extension StartViewController {
   
   private func addSubViews() {
     
-    [buttons.loginButton, buttons.registrationButton, imageView].forEach {
+    [buttons.loginButton, buttons.registrationButton].forEach {
       
       $0.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0)
     }
-  }
-  
-  private func setupImageView() {
-    
-    guard let image = UIImage.ivanFirst else { return }
-    imageView.backgroundColor = .main
-    imageView.image = image
-    imageView.contentMode = .scaleAspectFit
   }
   
   private func setupLoginButton() {
@@ -71,11 +61,6 @@ extension StartViewController {
   }
   
   private func setupConstraints() {
-    
-    imageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 50).isActive = true
-    imageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-    imageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-    imageView.bottomAnchor.constraint(equalTo: buttons.loginButton.topAnchor, constant: -50).isActive = true
     
     buttons.registrationButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
     buttons.registrationButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true

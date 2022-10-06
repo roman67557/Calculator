@@ -32,13 +32,13 @@ class LoginCoordinator: BaseCoordinator, LoginCoordinatorProtocol {
       
       let viewModel = LoginViewModel()
       
-//      viewModel.isRegistered
-//        .subscribe(onNext: { [weak self] bool in
-//          if bool == true {
-//            
-//          }
-//        })
-//        .disposed(by: bag)
+      viewModel.isSigned
+        .subscribe(onNext: { [weak self] bool in
+          if bool == true {
+            self?.signIn()
+          }
+        })
+        .disposed(by: bag)
       
       return viewModel
     }()
@@ -48,6 +48,15 @@ class LoginCoordinator: BaseCoordinator, LoginCoordinatorProtocol {
   
   func signIn() {
     
+    let tabCoordinator = TabCoordinator(navigationController: navigationController)
+    self.add(childCoordinator: tabCoordinator)
     
+    tabCoordinator.isCompleted = { [weak self, weak tabCoordinator] in
+      
+      guard let coordinator = tabCoordinator else { return }
+      self?.remove(childCoordinator: coordinator)
+    }
+    
+    tabCoordinator.start()
   }
 }

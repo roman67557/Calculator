@@ -1,20 +1,21 @@
 //
-//  EmptyView.swift
+//  MTView.swift
 //  Calculator
 //
-//  Created by Роман on 29.07.2022.
+//  Created by Роман on 24.07.2022.
 //
 
 import UIKit
-import Foundation
 
 class EmptyView: UIView {
   
   private let label = UILabel()
-//  private let detailedLabel = UILabel()
+  var text: String
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  init(text: String) {
+    self.text = text
+    
+    super.init(frame: CGRect())
     
     setup()
   }
@@ -26,46 +27,32 @@ class EmptyView: UIView {
   private func setup() {
     
     addSubViews()
-    setupLabel()
-//    detailedLabelSetup()
+    labelSetup()
     setupConstraints()
   }
   
   private func addSubViews() {
     
-    [label, /*detailedLabel*/].forEach {
+    [label].forEach {
       
       $0.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview($0)
     }
   }
   
-  private func setupLabel() {
+  private func labelSetup() {
     
-    label.font = .systemFont(ofSize: 25)
-    label.text = Strings.shared.empty
+    label.font = label.font.withSize(25)
+    label.text = text
     label.textAlignment = .center
   }
   
-//  private func detailedLabelSetup() {
-//
-//    detailedLabel.font = .systemFont(ofSize: 15)
-//    detailedLabel.text = "Здесь будут отображаться выбранные продукты."
-//    detailedLabel.textAlignment = .center
-//  }
-  
   private func setupConstraints() {
     
-    
-    label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    label.bottomAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    label.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     label.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     label.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    
-//    detailedLabel.topAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-//    detailedLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//    detailedLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//    detailedLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
   }
   
 }

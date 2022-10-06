@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     let navigationController: UINavigationController = {
-      let navigationCOntroller = UINavigationController()
-      let navBAr = navigationCOntroller.navigationBar
+      let navigationController = UINavigationController()
+      let navBar = navigationController.navigationBar
       
-      navBAr.tintColor = UIColor(named: "loginButtonColor")
-      return navigationCOntroller
+      navBar.tintColor = .subMain
+      return navigationController
     }()
     
     window?.rootViewController = navigationController

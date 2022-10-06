@@ -13,7 +13,6 @@ class RegistrationViewController: UIViewController {
   
   var viewModel: RegistrationViewModelProtocol?
   
-  private let imageView = UIImageView()
   private let registrationButton = UIButton()
   
   private let userNameTExtField = UITextField()
@@ -55,8 +54,7 @@ extension RegistrationViewController {
     
     addSubViews()
     setupKeyboardSettings()
-    setupImageView()
-    setupLoginButton()
+    setupRegistrationButton()
     setupLoginTextField()
     setupUserNameTextField()
     setupPasswordTextField()
@@ -66,7 +64,7 @@ extension RegistrationViewController {
   
   private func addSubViews() {
     
-    [registrationButton, emailTextField, userNameTExtField, passwordTextField, conformPasswprdTExtField, loadingView, imageView].forEach {
+    [registrationButton, emailTextField, userNameTExtField, passwordTextField, conformPasswprdTExtField, loadingView].forEach {
       
       $0.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0)
@@ -80,15 +78,7 @@ extension RegistrationViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
   }
   
-  private func setupImageView() {
-    
-    guard let image = UIImage.ivanSecond else { return }
-    imageView.backgroundColor = .main
-    imageView.image = image
-    imageView.contentMode = .scaleAspectFit
-  }
-  
-  private func setupLoginButton() {
+  private func setupRegistrationButton() {
     
     registrationButton.setTitle(Strings.shared.registrtionBttonString, for: .normal)
     registrationButton.backgroundColor = .registration
@@ -156,11 +146,6 @@ extension RegistrationViewController {
   }
   
   private func setupConstraints() {
-    
-    imageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 50).isActive = true
-    imageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-    imageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-    imageView.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -50).isActive = true
     
     registrationButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
     registrationButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true

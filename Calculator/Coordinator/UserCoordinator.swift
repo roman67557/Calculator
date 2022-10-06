@@ -19,6 +19,7 @@ class UserCoordinator: BaseCoordinator, UserCoordinatorProtocol {
   init(navigationController: UINavigationController) {
     super.init()
     
+    print("User Coordinator init")
     self.navigationController =  navigationController
   }
   

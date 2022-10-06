@@ -31,19 +31,35 @@ class MainModuleCoordinator: BaseCoordinator, MainModuleCoordinatorProtocol {
     view.viewModel = {
       
       let viewModel = MainViewModel()
+      let networkService = NetworkService()
       
-      //      viewModel.isRegistered
-      //        .subscribe(onNext: { [weak self] bool in
-      //          if bool == true {
-      //
-      //          }
-      //        })
-      //        .disposed(by: bag)
+      viewModel.networkService = networkService
+      
+      viewModel.goSubject
+        .map { [weak self] branded in
+          self?.goToDetailed(model: branded)
+        }
+        .subscribe()
+        .disposed(by: bag)
       
       return viewModel
     }()
     
-    navigationController.present(view, animated: true)
+    navigationController.pushViewController(view, animated: true)
+  }
+  
+  private func goToDetailed(model: Branded) {
+    
+    let detailedCoordinator = FoodDetailedCoordinator(navigationController: navigationController, model: model)
+    self.add(childCoordinator: detailedCoordinator)
+    
+    detailedCoordinator.isCompleted = { [weak self, weak detailedCoordinator] in
+      
+      guard let coordinator = detailedCoordinator else { return }
+      self?.remove(childCoordinator: coordinator)
+    }
+    
+    detailedCoordinator.start()
   }
     
 }

@@ -28,13 +28,14 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
     print("App Coordinator init")
     
     Auth.auth().addStateDidChangeListener { auth, user in
-      
+
       if user != nil {
         self.goToMain()
       } else {
         self.goToStart()
       }
     }
+//  goToMain()
   }
   
   func goToStart() {

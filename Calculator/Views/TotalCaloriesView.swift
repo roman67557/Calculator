@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import RxSwift
 
 class TotalCaloriesView: UIView {
   
   private let totalLabel = UILabel()
-  let caloriesLabel = UILabel()
-  var caloriesSum: Int?
+  private let caloriesLabel = UILabel()
+  public var caloriesSum: Int?
+  
+  private let bag = DisposeBag()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -50,7 +53,7 @@ class TotalCaloriesView: UIView {
   private func setupCaloriesLabel() {
     
     caloriesLabel.font = .systemFont(ofSize: 20)
-//    caloriesLabel.text = "\(String(describing: caloriesSum ?? 0))"
+//    caloriesLabel.text = "\(caloriesSum ?? 0)"
     caloriesLabel.textAlignment = .right
   }
   
@@ -67,4 +70,17 @@ class TotalCaloriesView: UIView {
     caloriesLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
   }
   
+}
+
+extension TotalCaloriesView {
+
+  public func configure(viewModel: SecondViewModelProtocol) {
+    
+    viewModel.caloriesSumSubject
+      .subscribe(onNext: { [weak self] sum in
+        self?.caloriesLabel.text = "\(sum)"
+      })
+      .disposed(by: bag)
+  }
+
 }

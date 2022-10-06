@@ -18,12 +18,14 @@ struct FoodSelected {
   
   let brandName: String?
   let foodName: String?
+  let weight: Int?
   let calories: Int?
   
-  init(userId: String, brandName: String, foodName: String, calories: Int) {
+  init(userId: String, brandName: String, foodName: String, weight: Int, calories: Int) {
     self.userId = userId
     self.brandName = brandName
     self.foodName = foodName
+    self.weight = weight
     self.calories = calories
     self.ref = nil
   }
@@ -33,12 +35,13 @@ struct FoodSelected {
     userId = snapshotValue?["userId"] as? String ?? ""
     brandName = snapshotValue?["brandName"] as? String ?? ""
     foodName = snapshotValue?["foodName"] as? String ?? ""
+    weight = snapshotValue?["weight"] as? Int ?? 0
     calories = snapshotValue?["calories"] as? Int ?? 0
     ref = snapShot.ref
   }
   
   func convertToDictionary() -> Any {
-    return ["userId": userId, "brandName": brandName as Any, "foodName": foodName as Any, "calories": calories ?? 0]
+    return ["userId": userId, "brandName": brandName as Any, "foodName": foodName as Any, "weight": weight as Any, "calories": calories as Any]
   }
  }
 

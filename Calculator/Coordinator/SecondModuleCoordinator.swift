@@ -43,7 +43,7 @@ class SecondModuleCoordinator: BaseCoordinator, SecondModuleCoordinatorProtocol 
       return viewModel
     }()
     
-    navigationController.present(view, animated: true)
+    navigationController.pushViewController(view, animated: true)
   }
     
 }

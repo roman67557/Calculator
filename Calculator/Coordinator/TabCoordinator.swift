@@ -11,16 +11,18 @@ protocol TabCoordinatorProtocol {
   
   var tabBarController: UITabBarController { get set }
   
-//  func selectPage(_ page: TabBarPage)
-//  func setSelectedIndex(_ index: Int)
-//  func currentPage() -> TabBarPage?
+  func selectPage(_ page: TabBarPage)
+  func selectedIndex(_ index: Int)
+  func currentPage() -> TabBarPage?
 }
 
 class TabCoordinator: BaseCoordinator, TabCoordinatorProtocol {
   
-  var tabBarController = UITabBarController()
+  var tabBarController: UITabBarController
   
   init(navigationController: UINavigationController) {
+    self.tabBarController = .init()
+    
     super.init()
     
     print("Tab Coordinator init")
@@ -41,14 +43,20 @@ class TabCoordinator: BaseCoordinator, TabCoordinatorProtocol {
     tabBarController.setViewControllers(tabControllers, animated: true)
     tabBarController.selectedIndex = TabBarPage.main.pageOrderNumber()
     tabBarController.tabBar.isTranslucent = false
+    tabBarController.tabBar.backgroundColor = .main
     
     navigationController.viewControllers = [tabBarController]
   }
   
   private func getTabController(_ page: TabBarPage) -> UINavigationController {
     
-    let navigationController = UINavigationController()
-    navigationController.setNavigationBarHidden(false, animated: false)
+    let navigationController: UINavigationController = {
+      let navController = UINavigationController()
+      let navBar = navController.navigationBar
+      
+      navBar.tintColor = .subMain
+      return navController
+    }()
     
     navigationController.tabBarItem = UITabBarItem(title: page.pageTitleValue(), image: page.pageIconValue(), selectedImage: page.pageIconSelectedValue())
     

@@ -9,7 +9,7 @@ import UIKit
 
 extension UIColor {
   
-  static let main = UIColor(named: "mainColor")
+  static let main = UIColor.white
   static let subMain = UIColor(named: "loginButtonColor")
   static let registration = UIColor(named: "registrationButtonColor")
 }

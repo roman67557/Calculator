@@ -6,26 +6,148 @@
 //
 
 import UIKit
+import RxSwift
 
 class DetailedViewController: UIViewController {
   
   var viewModel: DetailedViewModelProtocol!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+  
+  private let weightTextField = UITextField()
+  private let weightButton = UIButton()
+  private let calories = Int()
+  private let caloriesView = CaloriesView()
+  
+  private let bag = DisposeBag()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    self.navigationController?.navigationBar.prefersLargeTitles = false
+    self.navigationItem.title = "Title"
+    
+    setup()
+    setupBindings()
+  }
+  
+  private func setup() {
+    
+    addSubViews()
+    setupColor()
+    setupCaloriesView()
+    setupWeightTextField()
+    setupWeightButton()
+    setupConstraints()
+  }
+  
+  private func addSubViews() {
+    
+    [weightTextField, weightButton, caloriesView].forEach {
+      
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview($0)
     }
-    */
-
+  }
+  
+  private func setupColor() {
+    view.backgroundColor = .main
+  }
+  
+  private func setupCaloriesView() {
+    
+    caloriesView.configure(viewModel: viewModel)
+  }
+  
+  private func setupWeightTextField() {
+    
+    weightTextField.delegate = self
+    weightTextField.placeholder = "Введите вес в граммах"
+    weightTextField.font = .systemFont(ofSize: 20)
+    weightTextField.borderStyle = .roundedRect
+    weightTextField.autocorrectionType = .no
+    weightTextField.keyboardType = .default
+    weightTextField.returnKeyType = .done
+    weightTextField.contentVerticalAlignment = .center
+    weightTextField.layer.cornerRadius = 15
+    weightTextField.autocapitalizationType = .none
+  }
+  
+  private func setupWeightButton() {
+    
+    weightButton.setTitle(Strings.shared.add, for: .normal)
+    weightButton.backgroundColor = .subMain
+    weightButton.setTitleColor(.white, for: .normal)
+    weightButton.layer.cornerRadius = 8.0
+    weightButton.addTarget(self, action: #selector(didAddButtonTapped(_:)), for: .touchUpInside)
+  }
+  
+  private func setupConstraints() {
+    
+    weightTextField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: view.frame.size.height / 12).isActive = true
+    weightTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.size.width / 12).isActive = true
+    weightTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.size.width / 12).isActive = true
+    weightTextField.heightAnchor.constraint(equalToConstant: 70).isActive = true
+    
+    weightButton.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 40).isActive = true
+    weightButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+    weightButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+    weightButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    
+    caloriesView.topAnchor.constraint(equalTo: weightButton.topAnchor, constant: 100).isActive = true
+    caloriesView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    caloriesView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    caloriesView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+  }
+  
+  @objc private func didAddButtonTapped(_ sender: UIButton) {
+    
+    guard weightTextField.text != "" else {
+      setupAlert(message: Strings.shared.emptyField)
+      return
+    }
+    guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: weightTextField.text ?? "")) else {
+      setupAlert(message: Strings.shared.digitsOnly)
+      return 
+    }
+    guard let weight = weightTextField.text else { return }
+    
+    viewModel.addModel(weight: Int(weight) ?? 0)
+  }
+  
+  private func setupAlert(message: String) {
+    
+    let alert = AlertController(title: Strings.shared.error, message: message, preferredStyle: .alert)
+    present(alert, animated: true)
+  }
+  
 }
+
+extension DetailedViewController {
+  
+  private func setupBindings() {
+    
+    viewModel.titleSubject
+      .subscribe(onNext: { [weak self] title in
+        
+        self?.title = title
+      })
+      .disposed(by: bag)
+  }
+  
+}
+
+extension DetailedViewController: UITextFieldDelegate {
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
+    self.view.endEditing(true)
+    
+    return true
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+  
+}
+
+
