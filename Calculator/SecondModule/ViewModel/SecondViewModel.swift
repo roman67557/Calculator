@@ -18,22 +18,20 @@ protocol SecondViewModelProtocol {
   var emptySubject: PublishSubject<Bool> { get }
   var empty: Driver<Bool> { get }
   
-  var contentSubject: PublishSubject<[FoodSelected]> { get }
-  var content: Driver<[FoodSelected]> { get }
+  var contentSubject: BehaviorSubject<[ItemSection<FoodSelected>]> { get }
+  var content: Driver<[ItemSection<FoodSelected>]> { get }
   
   var caloriesSumSubject: PublishSubject<Int> { get }
   var caloriesSum: Driver<Int> { get }
   
   func fetchData()
-  func deleteData(indexPath: IndexPath, cellText: String)
+  func deleteData(text: String)
 }
 
 class SecondViewModel: SecondViewModelProtocol {
   
   private var user: AppUser?
   private var ref: DatabaseReference?
-  
-  private let bag = DisposeBag()
   
   internal var loadingSubject = PublishSubject<Bool>()
   var isLoading: Driver<Bool> {
@@ -45,8 +43,8 @@ class SecondViewModel: SecondViewModelProtocol {
     return emptySubject.asDriver(onErrorDriveWith: .empty())
   }
   
-  internal var contentSubject = PublishSubject<[FoodSelected]>()
-  var content: Driver<[FoodSelected]> {
+  internal var contentSubject = BehaviorSubject<[ItemSection<FoodSelected>]>(value: [ItemSection(header: "", items: [FoodSelected]())])
+  var content: Driver<[ItemSection<FoodSelected>]> {
     return contentSubject.asDriver(onErrorDriveWith: .empty())
   }
   
@@ -54,6 +52,8 @@ class SecondViewModel: SecondViewModelProtocol {
   var caloriesSum: Driver<Int> {
     return caloriesSumSubject.asDriver(onErrorDriveWith: .empty())
   }
+  
+  private let bag = DisposeBag()
   
   init() {
     
@@ -68,37 +68,52 @@ class SecondViewModel: SecondViewModelProtocol {
   private func output() {
     
     foodSelectedSubject
-      .subscribe { [weak self] elements in
+      .map({ [weak self] elements -> [ItemSection<FoodSelected>] in
+        var sections: [ItemSection<FoodSelected>] = []
         
         if elements.isEmpty {
           self?.emptySubject.onNext(false)
           self?.loadingSubject.onNext(true)
-          self?.caloriesSumSubject.onNext(0)
         } else {
           
           self?.emptySubject.onNext(true)
           self?.loadingSubject.onNext(true)
-          self?.contentSubject.onNext(elements)
           
           var caloriesSum = 0
-          for item in elements {
-            caloriesSum += item.calories ?? 0
+          
+          elements.forEach { element in
+            
+            let section = ItemSection(header: "", items: [element])
+            
+            caloriesSum += element.calories ?? 0
+            sections.append(section)
           }
+          
           self?.caloriesSumSubject.onNext(caloriesSum)
+          self?.contentSubject.onNext(sections)
         }
-      }
-      .disposed(by: bag)
-    
-//    foodSelectedSubject
-//      .asObservable()
-//      .subscribe(onNext: { [weak self] foodSelected in
-//        var caloriesSum = 0
-//        for item in foodSelected {
-//          caloriesSum += item.calories ?? 1
+        return sections
+      })
+//      .subscribe { [weak self] elements in
+//
+//        if elements.isEmpty {
+//          self?.emptySubject.onNext(false)
+//          self?.loadingSubject.onNext(true)
+//        } else {
+//
+//          self?.emptySubject.onNext(true)
+//          self?.loadingSubject.onNext(true)
+//          self?.contentSubject.onNext(elements)
+//
+//          var caloriesSum = 0
+//          for item in elements {
+//            caloriesSum += item.calories ?? 0
+//          }
+//          self?.caloriesSumSubject.onNext(caloriesSum)
 //        }
-//        self?.caloriesSumSubject.onNext(caloriesSum)
-//      })
-//      .disposed(by: bag)
+//      }
+      .subscribe()
+      .disposed(by: bag)
   }
   
   func fetchData() {
@@ -114,13 +129,13 @@ class SecondViewModel: SecondViewModelProtocol {
     })
   }
   
-  func deleteData(indexPath: IndexPath, cellText: String) {
+  func deleteData(text: String) {
     
-    foodSelectedModel.remove(at: indexPath.row)
-    
-    ref?.child(cellText).removeValue()
-    
-    foodSelectedSubject.onNext(foodSelectedModel)
+//    foodSelectedModel.remove(at: indexPath.section)
+
+    ref?.child(text).removeValue()
+    self.fetchData()
+//    foodSelectedSubject.onNext(foodSelectedModel)
   }
   
 }

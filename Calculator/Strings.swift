@@ -15,7 +15,7 @@ class Strings {
   let loginButtonString = "Войти"
   let registrtionBttonString = "Регистрация"
   
-  let loginPlaceholderString = "Логин"
+  let loginPlaceholderString = "Электронная почта"
   let userNamePlaceholerString = "Ваше имя"
   let passwordPlaceholderString = "Пароль"
   let conformPasswordPlaceholderString = "Подтвердите пароль"

@@ -39,9 +39,11 @@ class RegistrationViewModel: RegistrationViewModelProtocol {
         return
       }
       
-      guard let userId = user?.user.uid, let email = user?.user.email else { return }
+      guard let currentUser = user?.user ,let userId = user?.user.uid else { return }
       let userRef = self?.ref?.child(userId)
-      userRef?.setValue(["email": email, "name": name])
+      var user = AppUser(user: currentUser)
+      user.name = name
+      userRef?.setValue(user.convertToDictionary())
       
       self?.isRegistered.onNext(true)
     }

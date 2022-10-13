@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxDataSources
 
 class SecondViewController: UIViewController {
   
@@ -15,6 +16,14 @@ class SecondViewController: UIViewController {
   var viewModel: SecondViewModelProtocol!
   
   private let tableView = UITableView()
+  private let dataSource = RxTableViewSectionedReloadDataSource<ItemSection<FoodSelected>>(configureCell: { _, tableView, indexPath, model -> UITableViewCell in
+    
+    let cell = tableView.dequeueReusableCell(withIdentifier: FoodSelectedTableViewCell.identifier, for: indexPath) as? FoodSelectedTableViewCell
+    
+    cell?.configure(with: model)
+    return cell ?? UITableViewCell()
+  })
+  
   private let loadingView = UIActivityIndicatorView(style: .large)
   private let emptyView = EmptyView(text: Strings.shared.empty)
   private let totalCaloriesView = TotalCaloriesView()
@@ -30,6 +39,13 @@ class SecondViewController: UIViewController {
     super.viewWillAppear(animated)
     
     viewModel.fetchData()
+    self.navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    self.navigationController?.setNavigationBarHidden(false, animated: true)
   }
   
   private func setup() {
@@ -37,7 +53,6 @@ class SecondViewController: UIViewController {
     tableView.isHidden = false
     totalCaloriesView.isHidden = false
     loadingView.isHidden = false
-//    loadingView.isAnimating = true
     emptyView.isHidden = true
     
     addSubViews()
@@ -58,7 +73,7 @@ class SecondViewController: UIViewController {
   
   private func setupColor() {
     self.view.backgroundColor = .main
-  }
+}
   
   private func setupTotalCaloriesView() {
 
@@ -67,8 +82,11 @@ class SecondViewController: UIViewController {
   
   private func setupTableView() {
     
+    tableView.separatorStyle = .none
     tableView.backgroundColor = .main
     tableView.register(FoodSelectedTableViewCell.self, forCellReuseIdentifier: FoodSelectedTableViewCell.identifier)
+    
+    tableView.rx.rowHeight.onNext(tableViewCellHeight)
   }
   
   private func setupConstraints() {
@@ -128,20 +146,26 @@ extension SecondViewController {
       .drive(self.totalCaloriesView.rx.caloriesSum)
       .disposed(by: bag)
     
-    viewModel.content.asDriver().drive(tableView.rx.items(cellIdentifier: FoodSelectedTableViewCell.identifier)) { (index, model: FoodSelected, cell) in
-      
-      cell.textLabel?.text = model.foodName
-      cell.detailTextLabel?.text = "\(model.weight ?? 0)г/\(model.calories ?? 0)ккал"
-    }
-    .disposed(by: bag)
+    viewModel.content.asDriver().drive(tableView.rx.items(dataSource: dataSource)).disposed(by: bag)
     
-    tableView.rx.itemDeleted
-      .map { [weak self] indexPath in
-        guard let cellText = self?.tableView.cellForRow(at: indexPath)?.textLabel?.text?.lowercased() else { return }
-        self?.viewModel.deleteData(indexPath: indexPath, cellText: cellText)
+    tableView.rx.modelDeleted(FoodSelected.self)
+      .map { [weak self] foodSelected in
+        guard let text = foodSelected.foodName?.lowercased() else { return }
+        self?.viewModel.deleteData(text: text)
       }
       .subscribe()
       .disposed(by: bag)
+    
+//    tableView.rx.itemDeleted
+//      .map { [weak self] indexPath in
+//
+//        guard let cellText = self?.tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
+//        print(cellText)
+//        self?.viewModel.deleteData(indexPath: indexPath, cellText: cellText)
+//      }
+//      .subscribe()
+//      .disposed(by: bag)
   }
   
 }
+

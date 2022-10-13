@@ -5,6 +5,7 @@
 //  Created by Роман on 25.09.2022.
 //
 
+
 import RxSwift
 import RxRelay
 import RxCocoa
@@ -73,7 +74,7 @@ class DetailedViewModel: DetailedViewModelProtocol {
     
     let calories = weight * (model.nfCalories ?? 0) / 100
     
-    let food = FoodSelected(userId: user?.uid ?? "", brandName: model.brandName ?? "", foodName: model.foodName ?? "", weight: weight, calories: calories)
+    let food = FoodSelected(brandName: model.brandName ?? "", foodName: model.foodName ?? "", weight: weight, calories: calories)
     let foodRef = ref?.child(model.foodName?.lowercased() ?? "")
     foodRef?.setValue(food.convertToDictionary())
     

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import RxCocoa
 
 class RegistrationViewController: UIViewController {
@@ -81,7 +80,7 @@ extension RegistrationViewController {
   private func setupRegistrationButton() {
     
     registrationButton.setTitle(Strings.shared.registrtionBttonString, for: .normal)
-    registrationButton.backgroundColor = .registration
+    registrationButton.backgroundColor = .subMain
     registrationButton.setTitleColor(.white, for: .normal)
     registrationButton.layer.cornerRadius = 8.0
     registrationButton.addTarget(self, action: #selector(didRegistrationButtonTapped(_:)), for: .touchUpInside)
@@ -208,7 +207,7 @@ extension RegistrationViewController {
     if notification.name == UIResponder.keyboardWillShowNotification {
       
 //      view.frame.origin.y = -keyboardRect.height
-      view.frame.origin.y = -100
+      view.frame.origin.y = -view.frame.size.height / 4
     } else {
       
       view.frame.origin.y = 0
@@ -227,7 +226,15 @@ extension RegistrationViewController: UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
-    self.view.endEditing(true)
+    if emailTextField.isFirstResponder {
+      userNameTExtField.becomeFirstResponder()
+    } else if userNameTExtField.isFirstResponder {
+      passwordTextField.becomeFirstResponder()
+    } else if passwordTextField.isFirstResponder {
+      conformPasswprdTExtField.becomeFirstResponder()
+    } else {
+      self.view.endEditing(true)
+    }
     
     return true
   }

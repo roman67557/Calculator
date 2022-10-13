@@ -13,7 +13,7 @@ var foodSelectedSubject = PublishSubject<[FoodSelected]>()
 var foodSelectedModel = [FoodSelected]()
 
 struct FoodSelected {
-  let userId: String
+  
   let ref: DatabaseReference?
   
   let brandName: String?
@@ -21,8 +21,7 @@ struct FoodSelected {
   let weight: Int?
   let calories: Int?
   
-  init(userId: String, brandName: String, foodName: String, weight: Int, calories: Int) {
-    self.userId = userId
+  init(brandName: String, foodName: String, weight: Int, calories: Int) {
     self.brandName = brandName
     self.foodName = foodName
     self.weight = weight
@@ -32,7 +31,6 @@ struct FoodSelected {
   
   init(snapShot: DataSnapshot) {
     let snapshotValue = snapShot.value as? [String: AnyObject]
-    userId = snapshotValue?["userId"] as? String ?? ""
     brandName = snapshotValue?["brandName"] as? String ?? ""
     foodName = snapshotValue?["foodName"] as? String ?? ""
     weight = snapshotValue?["weight"] as? Int ?? 0
@@ -41,7 +39,7 @@ struct FoodSelected {
   }
   
   func convertToDictionary() -> Any {
-    return ["userId": userId, "brandName": brandName as Any, "foodName": foodName as Any, "weight": weight as Any, "calories": calories as Any]
+    return ["brandName": brandName as Any, "foodName": foodName as Any, "weight": weight as Any, "calories": calories as Any]
   }
  }
 

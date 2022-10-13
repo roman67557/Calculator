@@ -8,20 +8,24 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import FirebaseAuth
-import FirebaseDatabase
+import RxDataSources
 
 class MainModuleViewController: UIViewController {
   
   var viewModel: MainViewModelProtocol!
   
   private let searchBar = UISearchBar()
-  private let tableView = UITableView()
   private let loadingView: UIActivityIndicatorView? = UIActivityIndicatorView(style: .large)
-  private let emptyView: EmptyView? = EmptyView(text: Strings.shared.nothingHaveFound)
+  private let emptyView = EmptyView(text: Strings.shared.nothingHaveFound)
   
-  private var user: AppUser?
-  private var ref: DatabaseReference?
+  private var tableView = UITableView()
+  private let dataSource = RxTableViewSectionedReloadDataSource<ItemSection<Branded>>(configureCell: { _, tableView, indexPath, model -> UITableViewCell in
+    
+    let cell = tableView.dequeueReusableCell(withIdentifier: FoodTableViewCell.identifier, for: indexPath) as? FoodTableViewCell
+    
+    cell?.configure(with: model)
+    return cell ?? UITableViewCell()
+  })
   
   private let bag = DisposeBag()
   
@@ -34,29 +38,14 @@ class MainModuleViewController: UIViewController {
   
   private func setup() {
     
-    tableView.isHidden = false
-    emptyView?.isHidden = true
-    loadingView?.isHidden = true
+    viewModel.setupUser()
     
-    setupUser()
-    
-    setupColor()
     addSubViews()
+    setupColor()
+    setupHiddenViews()
     setupSearchBar()
     setupTableView()
     setupConstraints()
-  }
-  
-  private func setupUser() {
-    
-    guard let currentUser = Auth.auth().currentUser else { return }
-    user = AppUser(user: currentUser)
-    guard let userId = user?.uid else { return }
-    ref = Database.database().reference(withPath: "users").child(userId)
-  }
-  
-  private func setupColor() {
-    view.backgroundColor = .main
   }
   
   private func addSubViews() {
@@ -65,6 +54,17 @@ class MainModuleViewController: UIViewController {
       $0?.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0 ?? UIView())
     }
+  }
+  
+  private func setupColor() {
+    view.backgroundColor = .main
+  }
+  
+  private func setupHiddenViews() {
+    
+    tableView.isHidden = false
+    emptyView.isHidden = true
+    loadingView?.isHidden = true
   }
   
   private func setupSearchBar() {
@@ -78,8 +78,12 @@ class MainModuleViewController: UIViewController {
   private func setupTableView() {
     
     tableView.keyboardDismissMode = .onDrag
+    tableView.separatorStyle = .none
     tableView.backgroundColor = .main
     tableView.register(FoodTableViewCell.self, forCellReuseIdentifier: FoodTableViewCell.identifier)
+    
+    tableView.rx.rowHeight.onNext(tableViewCellHeight)
+//    tableView.rx.estimatedSectionFooterHeight.onNext(2)
   }
   
   private func setupConstraints() {
@@ -94,10 +98,10 @@ class MainModuleViewController: UIViewController {
     loadingView?.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     loadingView?.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     
-    emptyView?.topAnchor.constraint(equalTo: view.topAnchor).isActive  = true
-    emptyView?.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    emptyView?.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    emptyView?.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    emptyView.topAnchor.constraint(equalTo: view.topAnchor).isActive  = true
+    emptyView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
   }
 
 }
@@ -127,19 +131,14 @@ extension MainModuleViewController {
         .disposed(by: bag)
     }
     
-    if let errorView = emptyView {
-      
-      viewModel.error
-        .map({ $0 == nil })
-        .drive(errorView.rx.isHidden)
-        .disposed(by: bag)
-    }
+    viewModel.error
+      .map({ $0 == nil })
+      .drive(emptyView.rx.isHidden)
+      .disposed(by: bag)
     
-    viewModel.content.drive(tableView.rx.items(cellIdentifier: FoodTableViewCell.identifier)) { (index, food: Branded, cell) in
-      
-      cell.textLabel?.text = food.foodName
-    }
-    .disposed(by: bag)
+    viewModel.content
+      .drive(tableView.rx.items(dataSource: dataSource))
+      .disposed(by: bag)
     
     tableView.rx.modelSelected(Branded.self)
       .map { [weak self] branded in
@@ -156,6 +155,9 @@ extension MainModuleViewController: UISearchBarDelegate {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
     self.view.endEditing(true)
+    self.emptyView.endEditing(true)
+    self.tableView.endEditing(true)
+    self.searchBar.endEditing(true)
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -164,3 +166,4 @@ extension MainModuleViewController: UISearchBarDelegate {
   }
   
 }
+

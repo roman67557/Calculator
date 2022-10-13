@@ -31,19 +31,16 @@ class SecondModuleCoordinator: BaseCoordinator, SecondModuleCoordinatorProtocol 
     view.viewModel = {
       
       let viewModel = SecondViewModel()
-      
-      //      viewModel.isRegistered
-      //        .subscribe(onNext: { [weak self] bool in
-      //          if bool == true {
-      //
-      //          }
-      //        })
-      //        .disposed(by: bag)
+    
       
       return viewModel
     }()
     
     navigationController.pushViewController(view, animated: true)
+  }
+  
+  deinit {
+    print("Second Coordinator deinit")
   }
     
 }

@@ -5,6 +5,7 @@
 //  Created by Роман on 25.09.2022.
 //
 
+import UIKit
 import RxSwift
 
 protocol FoodDetailedCoordinatorProtocol {

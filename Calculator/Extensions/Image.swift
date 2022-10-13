@@ -18,8 +18,8 @@ extension UIImage {
   static let searchFood = UIImage(named: "bread")
   static let searchFoodTapped = UIImage(named: "breadTapped")
   
-  static let selectedFood = UIImage(named: "meal")
-  static let selectedFoodTapped = UIImage(named: "mealTapped")
+  static let selectedFood = UIImage(named: "calories")
+  static let selectedFoodTapped = UIImage(named: "caloriesTapped")
   
   static let user = UIImage(named: "user")
   static let userTapped = UIImage(named: "userTapped")

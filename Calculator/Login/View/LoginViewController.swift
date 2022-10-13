@@ -23,19 +23,22 @@ class LoginViewController: UIViewController {
     setup()
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+  }
+  
   private func setup() {
     
     addSubViews()
     setupColor()
+    setupKeyboardSettings()
     setuploginButton()
     setupLoginTextField()
     setupPasswordTextField()
     setupConformPasswordTextField()
     setupConstraints()
-  }
-  
-  private func setupColor() {
-    self.view.backgroundColor = .main
   }
   
   private func addSubViews() {
@@ -44,6 +47,17 @@ class LoginViewController: UIViewController {
       $0.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0)
     }
+  }
+  
+  private func setupColor() {
+    self.view.backgroundColor = .main
+  }
+  
+  private func setupKeyboardSettings() {
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
   }
   
   private func setuploginButton() {
@@ -159,13 +173,34 @@ class LoginViewController: UIViewController {
     }
   }
   
+  @objc func keyBoardWillChange(notification: Notification) {
+    
+//    guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else  { return }
+    
+    if notification.name == UIResponder.keyboardWillShowNotification {
+      
+//      view.frame.origin.y = -keyboardRect.height
+      view.frame.origin.y = -view.frame.size.height / 4
+    } else {
+      
+      view.frame.origin.y = 0
+    }
+    
+  }
+  
 }
 
 extension LoginViewController: UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
-    self.view.endEditing(true)
+    if emailTextField.isFirstResponder {
+      passwordTextField.becomeFirstResponder()
+    } else if passwordTextField.isFirstResponder {
+      conformPasswordTextField.becomeFirstResponder()
+    } else {
+      self.view.endEditing(true)
+    }
     
     return true
   }

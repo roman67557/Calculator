@@ -7,6 +7,8 @@
 
 import RxSwift
 import RxCocoa
+import FirebaseAuth
+import FirebaseDatabase
 
 protocol MainViewModelProtocol {
   
@@ -19,10 +21,12 @@ protocol MainViewModelProtocol {
   var errorSubject: PublishSubject<SearchError?> { get }
   var error: Driver<SearchError?> { get }
   
-  var contentSubject: PublishSubject<[Branded]> { get }
-  var content: Driver<[Branded]> { get }
+  var contentSubject: PublishSubject<[ItemSection<Branded>]> { get }
+  var content: Driver<[ItemSection<Branded>]> { get }
   
   var goSubject: PublishSubject<Branded> { get }
+  
+  func setupUser()
   
   func goToDetailed(model: Branded)
 }
@@ -48,18 +52,22 @@ class MainViewModel: MainViewModelProtocol {
     return errorSubject.asDriver(onErrorJustReturn: SearchError.unkowned)
   }
   
-  internal var contentSubject = PublishSubject<[Branded]>()
-  var content: Driver<[Branded]> {
+  internal var contentSubject = PublishSubject<[ItemSection<Branded>]>()
+  var content: Driver<[ItemSection<Branded>]> {
     return contentSubject.asDriver(onErrorJustReturn: [])
   }
   
   var goSubject = PublishSubject<Branded>()
   
+  private var user: AppUser?
+  private var ref: DatabaseReference?
+  
   init() {
-      output()
+    
+    output()
   }
   
-  func output() {
+  private func output() {
     
     searchSubject
       .asObservable()
@@ -76,21 +84,37 @@ class MainViewModel: MainViewModelProtocol {
             return Observable.empty()
           }
       })
-      .subscribe(onNext: { [unowned self] elements in
-        
-        self.loadingSubject.onNext(false)
+//      .map({ $0.sorted(by: { $0.foodName?.localizedCaseInsensitiveCompare($1.foodName ?? Strings.shared.error) == .orderedAscending }) })
+      .map({ [weak self] elements -> [ItemSection<Branded>] in
+        var sections: [ItemSection<Branded>] = []
+        self?.loadingSubject.onNext(false)
         
         if elements.isEmpty {
-          self.errorSubject.onNext(SearchError.notFound)
+          self?.errorSubject.onNext(SearchError.notFound)
         } else {
-          self.contentSubject.onNext(elements)
+          elements.forEach { element in
+            
+            let section = ItemSection(header: "", items: [element])
+            sections.append(section)
+          }
+          self?.contentSubject.onNext(sections)
         }
+        return sections
       })
+      .subscribe()
       .disposed(by: bag)
   }
   
   func goToDetailed(model: Branded) {
     goSubject.onNext(model)
+  }
+  
+  public func setupUser() {
+    
+    guard let currentUser = Auth.auth().currentUser else { return }
+    user = AppUser(user: currentUser)
+    guard let userId = user?.uid else { return }
+    ref = Database.database().reference(withPath: "users").child(userId)
   }
   
 }

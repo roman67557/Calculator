@@ -10,10 +10,6 @@ import UIKit
 protocol TabCoordinatorProtocol {
   
   var tabBarController: UITabBarController { get set }
-  
-  func selectPage(_ page: TabBarPage)
-  func selectedIndex(_ index: Int)
-  func currentPage() -> TabBarPage?
 }
 
 class TabCoordinator: BaseCoordinator, TabCoordinatorProtocol {
@@ -37,13 +33,17 @@ class TabCoordinator: BaseCoordinator, TabCoordinatorProtocol {
     let controllers: [UINavigationController] = pages.map({ getTabController($0) })
     
     prepareTabBarController(withTabControllers: controllers)
+    
+    setupStatusBarColor()
   }
   
   private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
     tabBarController.setViewControllers(tabControllers, animated: true)
     tabBarController.selectedIndex = TabBarPage.main.pageOrderNumber()
     tabBarController.tabBar.isTranslucent = false
-    tabBarController.tabBar.backgroundColor = .main
+    tabBarController.tabBar.backgroundColor = .cellColor
+    tabBarController.tabBar.barTintColor = .cellColor
+    tabBarController.tabBar.tintColor = .mainReversed
     
     navigationController.viewControllers = [tabBarController]
   }
@@ -54,10 +54,28 @@ class TabCoordinator: BaseCoordinator, TabCoordinatorProtocol {
       let navController = UINavigationController()
       let navBar = navController.navigationBar
       
+      let appearance = UINavigationBarAppearance()
+      
+      appearance.backgroundColor = .cellColor
+    
+      navBar.backgroundColor = .cellColor
       navBar.tintColor = .subMain
+      
+      navBar.layer.borderColor = UIColor.borderColor
+      
+      navBar.scrollEdgeAppearance = appearance
+      navBar.standardAppearance = appearance
+      navBar.compactAppearance = appearance
+      if #available(iOS 15.0, *) {
+        navBar.compactScrollEdgeAppearance = appearance
+      } else {
+        // Fallback on earlier versions
+      }
+      
       return navController
     }()
     
+    navigationController.setNavigationBarHidden(false, animated: false)
     navigationController.tabBarItem = UITabBarItem(title: page.pageTitleValue(), image: page.pageIconValue(), selectedImage: page.pageIconSelectedValue())
     
     switch page {
@@ -98,16 +116,21 @@ class TabCoordinator: BaseCoordinator, TabCoordinatorProtocol {
     return navigationController
   }
   
-  func currentPage() -> TabBarPage? { TabBarPage.init(index: tabBarController.selectedIndex) }
-  
-  func selectPage(_ page: TabBarPage) {
-    tabBarController.selectedIndex = page.pageOrderNumber()
-    }
-  
-  func selectedIndex(_ index: Int) {
-    guard let page = TabBarPage.init(index: index) else { return }
+  private func setupStatusBarColor() {
     
-    tabBarController.selectedIndex = page.pageOrderNumber()
+    if #available(iOS 13.0, *) {
+      
+      let statusBar = UIView(frame: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+      statusBar.backgroundColor = .cellColor
+      
+      UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(statusBar)
+      
+    } else {
+      
+      let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+      statusBar?.backgroundColor = .cellColor
+      
+    }
   }
   
 }

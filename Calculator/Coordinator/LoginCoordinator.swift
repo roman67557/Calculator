@@ -5,7 +5,7 @@
 //  Created by Роман on 22.09.2022.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
 protocol LoginCoordinatorProtocol {

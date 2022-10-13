@@ -35,7 +35,6 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
         self.goToStart()
       }
     }
-//  goToMain()
   }
   
   func goToStart() {

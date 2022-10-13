@@ -27,7 +27,7 @@ class EmptyView: UIView {
   private func setup() {
     
     addSubViews()
-    labelSetup()
+    setupLabel()
     setupConstraints()
   }
   
@@ -40,7 +40,7 @@ class EmptyView: UIView {
     }
   }
   
-  private func labelSetup() {
+  private func setupLabel() {
     
     label.font = label.font.withSize(25)
     label.text = text

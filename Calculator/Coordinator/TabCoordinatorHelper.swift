@@ -8,44 +8,44 @@
 import UIKit
 
 enum TabBarPage {
-    case main
-    case second
-    case user
-
-    init?(index: Int) {
-        switch index {
-        case 0:
-            self = .main
-        case 1:
-            self = .second
-        case 2:
-            self = .user
-        default:
-            return nil
-        }
+  case main
+  case second
+  case user
+  
+  init?(index: Int) {
+    switch index {
+    case 0:
+      self = .main
+    case 1:
+      self = .second
+    case 2:
+      self = .user
+    default:
+      return nil
     }
-    
-    func pageTitleValue() -> String {
-        switch self {
-        case .main:
-            return "Поиск"
-        case .second:
-            return "Избранное"
-        case .user:
-            return "Пользователь"
-        }
+  }
+  
+  func pageTitleValue() -> String {
+    switch self {
+    case .main:
+      return "Поиск"
+    case .second:
+      return "Избранное"
+    case .user:
+      return "Пользователь"
     }
-
-    func pageOrderNumber() -> Int {
-        switch self {
-        case .main:
-            return 0
-        case .second:
-            return 1
-        case .user:
-            return 2
-        }
+  }
+  
+  func pageOrderNumber() -> Int {
+    switch self {
+    case .main:
+      return 0
+    case .second:
+      return 1
+    case .user:
+      return 2
     }
+  }
   
   func pageIconValue() -> UIImage {
     
@@ -70,5 +70,5 @@ enum TabBarPage {
       return UIImage.userTapped ?? UIImage()
     }
   }
-
+  
 }

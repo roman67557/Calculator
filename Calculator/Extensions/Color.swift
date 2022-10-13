@@ -9,7 +9,11 @@ import UIKit
 
 extension UIColor {
   
-  static let main = UIColor.white
+  static let main = UIColor(named: "mainColor")
+  static let mainReversed = UIColor(named: "mainReversedColor")
   static let subMain = UIColor(named: "loginButtonColor")
   static let registration = UIColor(named: "registrationButtonColor")
+  static let cellColor = UIColor(named: "cellColor")
+  
+  static let borderColor = UIColor.systemGray3.cgColor
 }
