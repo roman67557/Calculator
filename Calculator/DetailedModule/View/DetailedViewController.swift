@@ -10,7 +10,11 @@ import RxSwift
 
 class DetailedViewController: UIViewController {
   
-  var viewModel: DetailedViewModelProtocol!
+  //MARK: - Public Properties
+  
+  public var viewModel: DetailedViewModelProtocol!
+  
+  //MARK: - Private Properties
   
   private let weightTextField = UITextField()
   private let weightButton = UIButton()
@@ -18,6 +22,8 @@ class DetailedViewController: UIViewController {
   private let caloriesView = CaloriesView()
   
   private let bag = DisposeBag()
+  
+  //MARK: - Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,6 +34,8 @@ class DetailedViewController: UIViewController {
     setup()
     setupBindings()
   }
+  
+  //MARK: - Private Methods
   
   private func setup() {
     
@@ -119,10 +127,6 @@ class DetailedViewController: UIViewController {
     present(alert, animated: true)
   }
   
-}
-
-extension DetailedViewController {
-  
   private func setupBindings() {
     
     viewModel.titleSubject
@@ -135,7 +139,11 @@ extension DetailedViewController {
   
 }
 
+//MARK: - Extensions
+
 extension DetailedViewController: UITextFieldDelegate {
+  
+  //MARK: - Methods
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     

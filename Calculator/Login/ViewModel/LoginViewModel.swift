@@ -9,38 +9,49 @@ import RxSwift
 import FirebaseAuth
 import FirebaseDatabase
 
+//MARK: - Protocol
+
 protocol LoginvViewModelPorotcol {
   
   func signIn(email: String, password: String, completion: @escaping () -> ())
 }
 
+//MARK: - View Model
+
 class LoginViewModel: LoginvViewModelPorotcol {
+  
+  //MARK: - Properties
   
   var ref: DatabaseReference?
   var isSigned = PublishSubject<Bool>()
+  
+  //MARK: - Initializers
   
   init() {
     output()
   }
   
-  func output() {
+  //MARK: - Private Methods
+  
+  private func output() {
     ref = Database.database().reference(withPath: "users")
   }
   
-  func signIn(email: String, password: String, completion: @escaping () -> ()) {
+  //MARK: - Public Methods
+  
+  public func signIn(email: String, password: String, completion: @escaping () -> ()) {
     
     Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
       
       guard error == nil, user != nil else {
+        
+        errorSubject.onNext(error)
         completion()
         return
       }
       
-//      guard let userId = user?.user.uid, let email = user?.user.email else { return }
-//      let userRef = self?.ref?.child(userId)
-//      userRef?.setValue(["email": email, "name": name])
-      
       self?.isSigned.onNext(true)
     }
   }
+  
 }

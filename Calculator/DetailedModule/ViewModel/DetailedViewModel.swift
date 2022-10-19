@@ -12,7 +12,11 @@ import RxCocoa
 import FirebaseAuth
 import FirebaseDatabase
 
+//MARK: - Protocol
+
 protocol DetailedViewModelProtocol {
+  
+  //MARK: - Properties
   
   var closeRelay: PublishRelay<Bool> { get }
   
@@ -22,16 +26,17 @@ protocol DetailedViewModelProtocol {
   var caloriesSubject: PublishSubject<String> { get }
   var calories: Driver<String> { get }
   
+  //MARK: - Methods
+  
   func addModel(weight: Int)
   func getCalories() -> String
 }
 
+//MARK: - View Model
+
 class DetailedViewModel: DetailedViewModelProtocol {
   
-  private let model: Branded
-  
-  private var user: AppUser?
-  private var ref: DatabaseReference?
+  //MARK: - Properties
   
   var titleSubject = PublishSubject<String>()
   var title: Driver<String> {
@@ -45,7 +50,16 @@ class DetailedViewModel: DetailedViewModelProtocol {
   
   var closeRelay = PublishRelay<Bool>()
   
+  //MARK: - Private Properties
+  
+  private let model: Branded
+  
+  private var user: AppUser?
+  private var ref: DatabaseReference?
+  
   private let bag = DisposeBag()
+  
+  //MARK: - Initializers
   
   init(model: Branded) {
     self.model = model
@@ -58,6 +72,8 @@ class DetailedViewModel: DetailedViewModelProtocol {
     ref = Database.database().reference(withPath: "users").child(userId).child("food")
   }
   
+  //MARK: - Private Methods
+  
   private func output() {
     
     Observable.just(model)
@@ -69,6 +85,8 @@ class DetailedViewModel: DetailedViewModelProtocol {
       })
       .disposed(by: bag)
   }
+  
+  //MARK: - Public Methods
   
   public func addModel(weight: Int) {
     

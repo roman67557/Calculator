@@ -12,7 +12,11 @@ import RxDataSources
 
 class MainModuleViewController: UIViewController {
   
-  var viewModel: MainViewModelProtocol!
+  //MARK: - Public Properties
+  
+  public var viewModel: MainViewModelProtocol!
+  
+  //MARK: - Private Properties
   
   private let searchBar = UISearchBar()
   private let loadingView: UIActivityIndicatorView? = UIActivityIndicatorView(style: .large)
@@ -29,12 +33,16 @@ class MainModuleViewController: UIViewController {
   
   private let bag = DisposeBag()
   
+  //MARK: - Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setup()
     setupBindings()
   }
+  
+  //MARK: - Private Methods
   
   private func setup() {
     
@@ -83,7 +91,6 @@ class MainModuleViewController: UIViewController {
     tableView.register(FoodTableViewCell.self, forCellReuseIdentifier: FoodTableViewCell.identifier)
     
     tableView.rx.rowHeight.onNext(tableViewCellHeight)
-//    tableView.rx.estimatedSectionFooterHeight.onNext(2)
   }
   
   private func setupConstraints() {
@@ -103,10 +110,6 @@ class MainModuleViewController: UIViewController {
     emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
   }
-
-}
-
-extension MainModuleViewController {
   
   private func setupBindings() {
     
@@ -150,7 +153,11 @@ extension MainModuleViewController {
   
 }
 
+//MARK: - Extensions
+
 extension MainModuleViewController: UISearchBarDelegate {
+  
+  //MARK: - Methods
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     

@@ -10,7 +10,11 @@ import RxCocoa
 import FirebaseAuth
 import FirebaseDatabase
 
+//MARK: - Protocol
+
 protocol MainViewModelProtocol {
+  
+  //MARK: - Properties
   
   var searchSubject: PublishSubject<String> { get }
   var searchObserver: AnyObserver<String> { get }
@@ -26,46 +30,56 @@ protocol MainViewModelProtocol {
   
   var goSubject: PublishSubject<Branded> { get }
   
-  func setupUser()
+  //MARK: - Methods
   
+  func setupUser()
   func goToDetailed(model: Branded)
 }
 
+//MARK: - View Model
+
 class MainViewModel: MainViewModelProtocol {
   
-  var networkService: NetworkAPI!
+  //MARK: - Properties
   
-  private let bag = DisposeBag()
-  
-  internal var searchSubject = PublishSubject<String>()
+  var searchSubject = PublishSubject<String>()
   var searchObserver: AnyObserver<String> {
     return searchSubject.asObserver()
   }
   
-  internal var loadingSubject = PublishSubject<Bool>()
+  var loadingSubject = PublishSubject<Bool>()
   var isLoading: Driver<Bool> {
     return loadingSubject.asDriver(onErrorJustReturn: false)
   }
   
-  internal var errorSubject = PublishSubject<SearchError?>()
+  var errorSubject = PublishSubject<SearchError?>()
   var error: Driver<SearchError?> {
     return errorSubject.asDriver(onErrorJustReturn: SearchError.unkowned)
   }
   
-  internal var contentSubject = PublishSubject<[ItemSection<Branded>]>()
+  var contentSubject = PublishSubject<[ItemSection<Branded>]>()
   var content: Driver<[ItemSection<Branded>]> {
     return contentSubject.asDriver(onErrorJustReturn: [])
   }
   
   var goSubject = PublishSubject<Branded>()
+  var networkService: NetworkAPI!
+  
+  //MARK: - Private Properties
   
   private var user: AppUser?
   private var ref: DatabaseReference?
+  
+  private let bag = DisposeBag()
+  
+  //MARK: - Initializers
   
   init() {
     
     output()
   }
+  
+  //MARK: - Private Methods
   
   private func output() {
     
@@ -105,7 +119,9 @@ class MainViewModel: MainViewModelProtocol {
       .disposed(by: bag)
   }
   
-  func goToDetailed(model: Branded) {
+  //MARK: - Public Methods
+  
+  public func goToDetailed(model: Branded) {
     goSubject.onNext(model)
   }
   

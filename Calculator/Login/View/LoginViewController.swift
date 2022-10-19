@@ -9,7 +9,11 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
-  var viewModel: LoginvViewModelPorotcol!
+  //MARK: - Public Properties
+  
+  public var viewModel: LoginvViewModelPorotcol!
+  
+  //MARK: - Private Properties
   
   private let loginButton = UIButton()
   private let emailTextField = UITextField()
@@ -17,17 +21,23 @@ class LoginViewController: UIViewController {
   private let conformPasswordTextField = UITextField()
   private let loadingView = UIActivityIndicatorView(style: .large)
   
+  //MARK: - Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setup()
   }
   
+  //MARK: - Deinitializer
+  
   deinit {
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
   }
+  
+  //MARK: - Private Methods
   
   private func setup() {
     
@@ -144,22 +154,18 @@ class LoginViewController: UIViewController {
     loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
   }
   
-  private func setupAlert(message: String) {
-    
-    let alert = AlertController(title: Strings.shared.error, message: message, preferredStyle: .alert)
-    present(alert, animated: true)
-  }
-  
   @objc private func didLoginButtonTapped(_ sender: Any) {
     
     self.view.endEditing(true)
     
     guard let email = emailTextField.text, let password = passwordTextField.text, let conformPassword = conformPasswordTextField.text, !email.isEmpty, !password.isEmpty, !conformPassword.isEmpty else {
-      setupAlert(message: Strings.shared.emptyAlertString)
+      
+      errorSubject.onNext(CustomError.error(message: Strings.shared.emptyAlertString))
       return
     }
     guard conformPassword == password else {
-      setupAlert(message: Strings.shared.equalsPasswordsString)
+      
+      errorSubject.onNext(CustomError.error(message: Strings.shared.equalsPasswordsString))
       return
     }
     
@@ -167,7 +173,6 @@ class LoginViewController: UIViewController {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
       self?.viewModel?.signIn(email: email, password: password, completion: {
         
-        self?.setupAlert(message: Strings.shared.errorAlertString)
         self?.loadingView.stopAnimating()
       })
     }
@@ -190,7 +195,11 @@ class LoginViewController: UIViewController {
   
 }
 
+//MARK: - Extensions
+
 extension LoginViewController: UITextFieldDelegate {
+  
+  //MARK: - Methods
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     

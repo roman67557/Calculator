@@ -10,7 +10,11 @@ import RxCocoa
 
 class RegistrationViewController: UIViewController {
   
-  var viewModel: RegistrationViewModelProtocol?
+  //MARK: - Public Properties
+  
+  public var viewModel: RegistrationViewModelProtocol?
+  
+  //MARK: - Private Properties
   
   private let registrationButton = UIButton()
   
@@ -20,17 +24,15 @@ class RegistrationViewController: UIViewController {
   private let conformPasswprdTExtField = UITextField()
   private let loadingView = UIActivityIndicatorView(style: .large)
   
+  //MARK: - Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setup()
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
-    emailTextField.resignFirstResponder()
-    passwordTextField.resignFirstResponder()
-  }
+  //MARK: - Deinitializer
   
   deinit {
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -38,9 +40,7 @@ class RegistrationViewController: UIViewController {
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
   }
   
-}
-
-extension RegistrationViewController {
+  //MARK: - Private Methods
   
   private func setup() {
     
@@ -181,26 +181,36 @@ extension RegistrationViewController {
     
     self.view.endEditing(true)
     
-    guard let email = emailTextField.text, let username = userNameTExtField.text, let password = passwordTextField.text, let conformPassword = conformPasswprdTExtField.text, !email.isEmpty, !username.isEmpty, !password.isEmpty, !conformPassword.isEmpty else {
-      presentAlert(message: Strings.shared.emptyAlertString)
+    guard let email = emailTextField.text,
+          let username = userNameTExtField.text,
+          let password = passwordTextField.text,
+          let conformPassword = conformPasswprdTExtField.text,
+            !email.isEmpty,
+            !username.isEmpty,
+            !password.isEmpty,
+            !conformPassword.isEmpty else {
+      
+      errorSubject.onNext(CustomError.error(message: Strings.shared.emptyAlertString))
       return
     }
+    
     guard conformPassword == password else {
-      presentAlert(message: Strings.shared.equalsPasswordsString)
+      
+      errorSubject.onNext(CustomError.error(message: Strings.shared.equalsPasswordsString))
       return
     }
     
     loadingView.startAnimating()
+    
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
       self?.viewModel?.registration(name: username, email: email, password: password, completion: {
         
-        self?.presentAlert(message: Strings.shared.errorAlertString)
         self?.loadingView.stopAnimating()
       })
     }
   }
   
-  @objc func keyBoardWillChange(notification: Notification) {
+  @objc private func keyBoardWillChange(notification: Notification) {
     
 //    guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else  { return }
     
@@ -222,7 +232,11 @@ extension RegistrationViewController {
   
 }
 
+//MARK: - Extensions
+
 extension RegistrationViewController: UITextFieldDelegate {
+  
+  //MARK: - Methods
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
@@ -239,9 +253,10 @@ extension RegistrationViewController: UITextFieldDelegate {
     return true
   }
   
-  func presentAlert(message: String) {
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
-    let alert = AlertController(title: Strings.shared.error, message: message, preferredStyle: .alert)
-    present(alert, animated: true)
+    emailTextField.resignFirstResponder()
+    passwordTextField.resignFirstResponder()
   }
+  
 }

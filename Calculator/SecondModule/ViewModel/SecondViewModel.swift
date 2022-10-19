@@ -10,7 +10,11 @@ import RxCocoa
 import FirebaseAuth
 import FirebaseDatabase
 
+//MARK: - Protocol
+
 protocol SecondViewModelProtocol {
+  
+  //MARK: - Properties
   
   var loadingSubject: PublishSubject<Bool> { get }
   var isLoading: Driver<Bool> { get }
@@ -24,26 +28,29 @@ protocol SecondViewModelProtocol {
   var caloriesSumSubject: PublishSubject<Int> { get }
   var caloriesSum: Driver<Int> { get }
   
+  //MARK: - Methods
+  
   func fetchData()
   func deleteData(text: String)
 }
 
+//MARK: - View Model
+
 class SecondViewModel: SecondViewModelProtocol {
   
-  private var user: AppUser?
-  private var ref: DatabaseReference?
+  //MARK: - Properties
   
-  internal var loadingSubject = PublishSubject<Bool>()
+  var loadingSubject = PublishSubject<Bool>()
   var isLoading: Driver<Bool> {
     return loadingSubject.asDriver(onErrorJustReturn: false)
   }
   
-  internal var emptySubject = PublishSubject<Bool>()
+  var emptySubject = PublishSubject<Bool>()
   var empty: Driver<Bool> {
     return emptySubject.asDriver(onErrorDriveWith: .empty())
   }
   
-  internal var contentSubject = BehaviorSubject<[ItemSection<FoodSelected>]>(value: [ItemSection(header: "", items: [FoodSelected]())])
+  var contentSubject = BehaviorSubject<[ItemSection<FoodSelected>]>(value: [ItemSection(header: "", items: [FoodSelected]())])
   var content: Driver<[ItemSection<FoodSelected>]> {
     return contentSubject.asDriver(onErrorDriveWith: .empty())
   }
@@ -53,7 +60,14 @@ class SecondViewModel: SecondViewModelProtocol {
     return caloriesSumSubject.asDriver(onErrorDriveWith: .empty())
   }
   
+  //MARK: - Private Properties
+  
+  private var user: AppUser?
+  private var ref: DatabaseReference?
+  
   private let bag = DisposeBag()
+  
+  //MARK: - Initializers
   
   init() {
     
@@ -64,6 +78,8 @@ class SecondViewModel: SecondViewModelProtocol {
     
     output()
   }
+  
+  //MARK: - Private Methods
   
   private func output() {
     
@@ -94,29 +110,13 @@ class SecondViewModel: SecondViewModelProtocol {
         }
         return sections
       })
-//      .subscribe { [weak self] elements in
-//
-//        if elements.isEmpty {
-//          self?.emptySubject.onNext(false)
-//          self?.loadingSubject.onNext(true)
-//        } else {
-//
-//          self?.emptySubject.onNext(true)
-//          self?.loadingSubject.onNext(true)
-//          self?.contentSubject.onNext(elements)
-//
-//          var caloriesSum = 0
-//          for item in elements {
-//            caloriesSum += item.calories ?? 0
-//          }
-//          self?.caloriesSumSubject.onNext(caloriesSum)
-//        }
-//      }
       .subscribe()
       .disposed(by: bag)
   }
   
-  func fetchData() {
+  //MARK: - Public Methods
+  
+  public func fetchData() {
     
     ref?.observe(.value, with: { snapshot in
       var foodSelected = [FoodSelected]()
@@ -129,13 +129,10 @@ class SecondViewModel: SecondViewModelProtocol {
     })
   }
   
-  func deleteData(text: String) {
-    
-//    foodSelectedModel.remove(at: indexPath.section)
+  public func deleteData(text: String) {
 
     ref?.child(text).removeValue()
     self.fetchData()
-//    foodSelectedSubject.onNext(foodSelectedModel)
   }
   
 }

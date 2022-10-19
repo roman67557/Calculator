@@ -10,9 +10,15 @@ import FirebaseAuth
 
 class StartViewController: UIViewController {
   
-  var viewModel: StartViewModelProtocol?
+  //MARK: - Public Properties
+  
+  public var viewModel: StartViewModelProtocol?
+  
+  //MARK: - Private Properties
   
   private let buttons = (loginButton: UIButton(), registrationButton: UIButton())
+  
+  //MARK: - Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,9 +38,7 @@ class StartViewController: UIViewController {
     self.navigationController?.setNavigationBarHidden(false, animated: true)
   }
   
-}
-
-extension StartViewController {
+  //MARK: - Private Methods
   
   private func setup() {
     

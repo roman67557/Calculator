@@ -11,9 +11,11 @@ import RxDataSources
 
 class SecondViewController: UIViewController {
   
-  private let bag = DisposeBag()
+  //MARK: - Public Properties
   
   var viewModel: SecondViewModelProtocol!
+  
+  //MARK: - Private Properties
   
   private let tableView = UITableView()
   private let dataSource = RxTableViewSectionedReloadDataSource<ItemSection<FoodSelected>>(configureCell: { _, tableView, indexPath, model -> UITableViewCell in
@@ -27,6 +29,10 @@ class SecondViewController: UIViewController {
   private let loadingView = UIActivityIndicatorView(style: .large)
   private let emptyView = EmptyView(text: Strings.shared.empty)
   private let totalCaloriesView = TotalCaloriesView()
+  
+  private let bag = DisposeBag()
+  
+  //MARK: - Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,6 +53,8 @@ class SecondViewController: UIViewController {
     
     self.navigationController?.setNavigationBarHidden(false, animated: true)
   }
+  
+  //MARK: - Private Methods
   
   private func setup() {
     
@@ -111,12 +119,8 @@ class SecondViewController: UIViewController {
     loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
   }
-
-}
-
-extension SecondViewController {
   
-  func setupBindings() {
+  private func setupBindings() {
     
     viewModel.empty
       .drive(emptyView.rx.isHidden)
@@ -155,16 +159,6 @@ extension SecondViewController {
       }
       .subscribe()
       .disposed(by: bag)
-    
-//    tableView.rx.itemDeleted
-//      .map { [weak self] indexPath in
-//
-//        guard let cellText = self?.tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
-//        print(cellText)
-//        self?.viewModel.deleteData(indexPath: indexPath, cellText: cellText)
-//      }
-//      .subscribe()
-//      .disposed(by: bag)
   }
   
 }

@@ -11,28 +11,57 @@ import FirebaseDatabase
 import FirebaseStorage
 import RxSwift
 import RxCocoa
+import RxDataSources
+
+//MARK: - Protocol
 
 protocol UserViewModelProtocol {
+  
+  //MARK: - Properties
   
   var userNameSubject: PublishSubject<String> { get }
   var userPhotoSubject: BehaviorSubject<UIImage> { get }
   
-  func signOut()
+  var alertRelay: BehaviorRelay<Bool> { get }
+  
+  var contentSubject: PublishSubject<[ItemSection<AppUser>]> { get }
+  var content: Driver<[ItemSection<AppUser>]> { get }
+  
+  //MARK: - Methods
+  
+  func signOut(completion: @escaping ()->())
   func fetchData()
   
   func getPhoto(photo: UIImage)
   func deletePhoto()
 }
 
+//MARK: - View Model
+
 class UserViewModel: UserViewModelProtocol {
+  
+  //MARK: - Properties
   
   var userNameSubject = PublishSubject<String>()
   var userPhotoSubject = BehaviorSubject<UIImage>(value: UIImage(named: "userPhoto") ?? UIImage())
   
-  var user: AppUser?
-  var databaseRef: DatabaseReference?
+  var alertRelay = BehaviorRelay<Bool>(value: false)
   
-  var storageRef: StorageReference?
+  var contentSubject = PublishSubject<[ItemSection<AppUser>]>()
+  var content: Driver<[ItemSection<AppUser>]> {
+    return contentSubject.asDriver(onErrorDriveWith: .empty())
+  }
+  
+  //MARK: - Private Properties
+  
+  private var user: AppUser?
+  private  var databaseRef: DatabaseReference?
+  
+  private var storageRef: StorageReference?
+  
+  private let bag = DisposeBag()
+  
+  //MARK: - Initializers
   
   init() {
     
@@ -42,14 +71,39 @@ class UserViewModel: UserViewModelProtocol {
     databaseRef = Database.database().reference(withPath: "users").child(userId)
     
     storageRef = Storage.storage().reference().child("avatars").child(user?.uid ?? String()).child("userPhoto")
+    
+    output()
   }
   
-  public func signOut() {
+  //MARK: - Private Methods
+  
+  private func output() {
+    
+    Observable.combineLatest(userNameSubject, userPhotoSubject)
+      .subscribe { [weak self] userName, userPhoto in
+        
+        var sections: [ItemSection<AppUser>] = []
+        
+        let user = AppUser(name: userName, photo: "userPhoto")
+        
+        let section = ItemSection(header: userName, items: [user])
+        
+        sections.append(section)
+        
+        self?.contentSubject.onNext(sections)
+      }
+      .disposed(by: bag)
+  }
+  
+  //MARK: - Public Methods
+  
+  public func signOut(completion: @escaping ()->()) {
     do {
       try Auth.auth().signOut()
     } catch {
       print(error.localizedDescription)
     }
+    completion()
   }
   
   public func fetchData()  {
@@ -84,14 +138,19 @@ class UserViewModel: UserViewModelProtocol {
     metaData.contentType = "image/jpeg"
 
     storageRef?.putData(imageData, metadata: metaData, completion: { [weak self] metaData, error in
-      guard let _ = metaData else {
+      guard let _ = metaData, error == nil else {
+        
+        errorSubject.onNext(error)
         return
       }
 
       self?.storageRef?.downloadURL(completion: { url, error in
-        guard let url = url else {
+        guard let url = url, error == nil else {
+          
+          errorSubject.onNext(error)
           return
         }
+        
         self?.databaseRef?.updateChildValues(["photo" : "\(url)"])
         self?.fetchData()
       })
@@ -101,16 +160,13 @@ class UserViewModel: UserViewModelProtocol {
   public func deletePhoto() {
     
     storageRef?.delete(completion: { [weak self] error in
-      guard error == nil else { return }
+      guard error == nil else {
+        
+        errorSubject.onNext(error)
+        return
+      }
       self?.fetchData()
     })
-  }
-  
-  func saveData() {
-    
-    let date = Date()
-    
-    DispatchQueue.global()
   }
   
 }

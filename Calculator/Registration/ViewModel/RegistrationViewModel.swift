@@ -35,7 +35,9 @@ class RegistrationViewModel: RegistrationViewModelProtocol {
     Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
       
       guard error == nil, user != nil else {
+        
         completion()
+        errorSubject.onNext(error)
         return
       }
       

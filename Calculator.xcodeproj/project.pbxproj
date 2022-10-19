@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41ABC4255C4321ED83EA6A02 /* Pods_Calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0334541DF540A72D5B88732 /* Pods_Calculator.framework */; };
-		CE02435128D907A700DB83E2 /* MTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435028D907A700DB83E2 /* MTView.swift */; };
+		CE02435128D907A700DB83E2 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435028D907A700DB83E2 /* EmptyView.swift */; };
 		CE02435628D9BB3600DB83E2 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435328D9B98A00DB83E2 /* FoodTableViewCell.swift */; };
 		CE02435928D9BC9900DB83E2 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435828D9BC9900DB83E2 /* Color.swift */; };
 		CE02435B28D9C0E300DB83E2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02435A28D9C0E300DB83E2 /* Image.swift */; };
@@ -26,16 +25,26 @@
 		CE114C3128E07D6900F3DD6A /* TabCoordinatorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3028E07D6900F3DD6A /* TabCoordinatorHelper.swift */; };
 		CE114C3428E0837800F3DD6A /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3328E0837800F3DD6A /* TabCoordinator.swift */; };
 		CE114C3628E0E14C00F3DD6A /* FoodDetailedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3528E0E14C00F3DD6A /* FoodDetailedCoordinator.swift */; };
+		CE114C3828E5F2E100F3DD6A /* CaloriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE114C3728E5F2E100F3DD6A /* CaloriesView.swift */; };
 		CE1CBC94289D80E600859E0D /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC93289D80E600859E0D /* UserViewController.swift */; };
 		CE1CBC96289D80F500859E0D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC95289D80F500859E0D /* UserViewModel.swift */; };
 		CE1CBC98289F99AD00859E0D /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC97289F99AD00859E0D /* UserCoordinator.swift */; };
-		CE1CBC9A289F9D8100859E0D /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC99289F9D8100859E0D /* SwitchTableViewCell.swift */; };
-		CE1CBC9C289F9D9800859E0D /* ExitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBC9B289F9D9800859E0D /* ExitTableViewCell.swift */; };
-		CE585C042892E25000AC2D70 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE585C032892E25000AC2D70 /* LoadingView.swift */; };
+		CE7E8BCA28F84D75005906CF /* UserInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7E8BC928F84D75005906CF /* UserInfoTableViewCell.swift */; };
+		CE90672028FEBCCC0029832D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE90671F28FEBCCC0029832D /* FirebaseAuth */; };
+		CE90672228FEBCCC0029832D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CE90672128FEBCCC0029832D /* FirebaseDatabase */; };
+		CE90672428FEBCCC0029832D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = CE90672328FEBCCC0029832D /* FirebaseFunctions */; };
+		CE90672628FEBCCC0029832D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CE90672528FEBCCC0029832D /* FirebaseStorage */; };
+		CE90672928FEBD4D0029832D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE90672828FEBD4D0029832D /* Alamofire */; };
+		CE90672C28FEBD860029832D /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = CE90672B28FEBD860029832D /* RxDataSources */; };
+		CE90672F28FEBDEF0029832D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE90672E28FEBDEF0029832D /* RxCocoa */; };
+		CE90673128FEBDEF0029832D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = CE90673028FEBDEF0029832D /* RxRelay */; };
+		CE90673328FEBDEF0029832D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE90673228FEBDEF0029832D /* RxSwift */; };
 		CECD077A2892CA0D00D5F637 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD07792892CA0D00D5F637 /* BaseCoordinator.swift */; };
+		CED01C7F28EEB9F6009033F4 /* SectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED01C7E28EEB9F6009033F4 /* SectionModels.swift */; };
+		CED01C8128F16B77009033F4 /* Ints and Floats.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED01C8028F16B77009033F4 /* Ints and Floats.swift */; };
+		CED01C8328F1F85B009033F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED01C8228F1F85A009033F4 /* Assets.xcassets */; };
 		CED2B218288D86CC00C92578 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B217288D86CC00C92578 /* AppDelegate.swift */; };
 		CED2B222288D86CC00C92578 /* Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CED2B220288D86CC00C92578 /* Calculator.xcdatamodeld */; };
-		CED2B224288D86CE00C92578 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED2B223288D86CE00C92578 /* Assets.xcassets */; };
 		CED2B227288D86CE00C92578 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED2B225288D86CE00C92578 /* LaunchScreen.storyboard */; };
 		CED2B237288D87D800C92578 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B236288D87D800C92578 /* CustomError.swift */; };
 		CED2B239288D87F100C92578 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B238288D87F100C92578 /* FoodModel.swift */; };
@@ -44,8 +53,6 @@
 		CED2B240288D89EB00C92578 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B23F288D89EB00C92578 /* CoordinatorProtocol.swift */; };
 		CED2B242288D8A0400C92578 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B241288D8A0400C92578 /* CoordinatorFinishDelegate.swift */; };
 		CED2B244288D8A1B00C92578 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B243288D8A1B00C92578 /* AppCoordinator.swift */; };
-		CED4EB6D2893EFC7008A39C6 /* FoodSelectedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EB6C2893EFC7008A39C6 /* FoodSelectedModel.swift */; };
-		CED4EB6F2893F47F008A39C6 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EB6E2893F47F008A39C6 /* EmptyView.swift */; };
 		CED4EB7128947ECB008A39C6 /* FoodSelectedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EB7028947ECB008A39C6 /* FoodSelectedTableViewCell.swift */; };
 		CED7CE9D28BCF39400AFEA49 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED7CE9C28BCF39400AFEA49 /* AppUser.swift */; };
 		CED7CE9F28BCF55400AFEA49 /* FoodSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED7CE9E28BCF55400AFEA49 /* FoodSelected.swift */; };
@@ -62,9 +69,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		48C1EF4670911ECC1200713B /* Pods-Calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calculator.release.xcconfig"; path = "Target Support Files/Pods-Calculator/Pods-Calculator.release.xcconfig"; sourceTree = "<group>"; };
-		C0334541DF540A72D5B88732 /* Pods_Calculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE02435028D907A700DB83E2 /* MTView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTView.swift; sourceTree = "<group>"; };
+		CE02435028D907A700DB83E2 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		CE02435328D9B98A00DB83E2 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		CE02435828D9BC9900DB83E2 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE02435A28D9C0E300DB83E2 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -82,17 +87,18 @@
 		CE114C3028E07D6900F3DD6A /* TabCoordinatorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorHelper.swift; sourceTree = "<group>"; };
 		CE114C3328E0837800F3DD6A /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		CE114C3528E0E14C00F3DD6A /* FoodDetailedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailedCoordinator.swift; sourceTree = "<group>"; };
+		CE114C3728E5F2E100F3DD6A /* CaloriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesView.swift; sourceTree = "<group>"; };
 		CE1CBC93289D80E600859E0D /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CE1CBC95289D80F500859E0D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		CE1CBC97289F99AD00859E0D /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
-		CE1CBC99289F9D8100859E0D /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
-		CE1CBC9B289F9D9800859E0D /* ExitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitTableViewCell.swift; sourceTree = "<group>"; };
-		CE585C032892E25000AC2D70 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CE7E8BC928F84D75005906CF /* UserInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTableViewCell.swift; sourceTree = "<group>"; };
 		CECD07792892CA0D00D5F637 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		CED01C7E28EEB9F6009033F4 /* SectionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModels.swift; sourceTree = "<group>"; };
+		CED01C8028F16B77009033F4 /* Ints and Floats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ints and Floats.swift"; sourceTree = "<group>"; };
+		CED01C8228F1F85A009033F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED2B214288D86CC00C92578 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED2B217288D86CC00C92578 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CED2B221288D86CC00C92578 /* Calculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Calculator.xcdatamodel; sourceTree = "<group>"; };
-		CED2B223288D86CE00C92578 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED2B226288D86CE00C92578 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CED2B228288D86CE00C92578 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED2B236288D87D800C92578 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -102,8 +108,6 @@
 		CED2B23F288D89EB00C92578 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		CED2B241288D8A0400C92578 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
 		CED2B243288D8A1B00C92578 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		CED4EB6C2893EFC7008A39C6 /* FoodSelectedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSelectedModel.swift; sourceTree = "<group>"; };
-		CED4EB6E2893F47F008A39C6 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		CED4EB7028947ECB008A39C6 /* FoodSelectedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSelectedTableViewCell.swift; sourceTree = "<group>"; };
 		CED7CE9C28BCF39400AFEA49 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		CED7CE9E28BCF55400AFEA49 /* FoodSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSelected.swift; sourceTree = "<group>"; };
@@ -117,7 +121,6 @@
 		CEFE5FD528917952007E7631 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		CEFE5FD72891796C007E7631 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		CEFE5FD92891853B007E7631 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
-		F4FD5EC97B2BED4E5B372157 /* Pods-Calculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calculator.debug.xcconfig"; path = "Target Support Files/Pods-Calculator/Pods-Calculator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,30 +128,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41ABC4255C4321ED83EA6A02 /* Pods_Calculator.framework in Frameworks */,
+				CE90673328FEBDEF0029832D /* RxSwift in Frameworks */,
+				CE90672928FEBD4D0029832D /* Alamofire in Frameworks */,
+				CE90672428FEBCCC0029832D /* FirebaseFunctions in Frameworks */,
+				CE90672628FEBCCC0029832D /* FirebaseStorage in Frameworks */,
+				CE90672F28FEBDEF0029832D /* RxCocoa in Frameworks */,
+				CE90672C28FEBD860029832D /* RxDataSources in Frameworks */,
+				CE90672228FEBCCC0029832D /* FirebaseDatabase in Frameworks */,
+				CE90673128FEBDEF0029832D /* RxRelay in Frameworks */,
+				CE90672028FEBCCC0029832D /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		56CE1F911B5BE94180EED97C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F4FD5EC97B2BED4E5B372157 /* Pods-Calculator.debug.xcconfig */,
-				48C1EF4670911ECC1200713B /* Pods-Calculator.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CE02434C28D9071200DB83E2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CE02435528D9B9C700DB83E2 /* Alert */,
-				CE585C032892E25000AC2D70 /* LoadingView.swift */,
-				CE02435028D907A700DB83E2 /* MTView.swift */,
-				CED4EB6E2893F47F008A39C6 /* EmptyView.swift */,
+				CE02435028D907A700DB83E2 /* EmptyView.swift */,
 				CED9229B289800C300F9832B /* TotalCaloriesView.swift */,
+				CE114C3728E5F2E100F3DD6A /* CaloriesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,8 +159,7 @@
 			children = (
 				CE02435328D9B98A00DB83E2 /* FoodTableViewCell.swift */,
 				CED4EB7028947ECB008A39C6 /* FoodSelectedTableViewCell.swift */,
-				CE1CBC99289F9D8100859E0D /* SwitchTableViewCell.swift */,
-				CE1CBC9B289F9D9800859E0D /* ExitTableViewCell.swift */,
+				CE7E8BC928F84D75005906CF /* UserInfoTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -211,8 +211,6 @@
 			children = (
 				CED2B216288D86CC00C92578 /* Calculator */,
 				CED2B215288D86CC00C92578 /* Products */,
-				56CE1F911B5BE94180EED97C /* Pods */,
-				F8AFEF0F00862BBC05482672 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -241,12 +239,13 @@
 				CED2B22F288D878E00C92578 /* SecondModule */,
 				CE1CBC90289D80B100859E0D /* UserModule */,
 				CED2B22E288D877800C92578 /* DetailedModule */,
-				CED2B223288D86CE00C92578 /* Assets.xcassets */,
 				CED2B225288D86CE00C92578 /* LaunchScreen.storyboard */,
+				CED01C8228F1F85A009033F4 /* Assets.xcassets */,
 				CED7CEA028BD00EE00AFEA49 /* GoogleService-Info.plist */,
 				CED2B228288D86CE00C92578 /* Info.plist */,
 				CED2B220288D86CC00C92578 /* Calculator.xcdatamodeld */,
 				CEFE5FD72891796C007E7631 /* Strings.swift */,
+				CED01C8028F16B77009033F4 /* Ints and Floats.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -320,9 +319,9 @@
 			children = (
 				CED2B236288D87D800C92578 /* CustomError.swift */,
 				CED2B238288D87F100C92578 /* FoodModel.swift */,
-				CED4EB6C2893EFC7008A39C6 /* FoodSelectedModel.swift */,
 				CED7CE9C28BCF39400AFEA49 /* AppUser.swift */,
 				CED7CE9E28BCF55400AFEA49 /* FoodSelected.swift */,
+				CED01C7E28EEB9F6009033F4 /* SectionModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,14 +449,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		F8AFEF0F00862BBC05482672 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C0334541DF540A72D5B88732 /* Pods_Calculator.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -465,11 +456,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CED2B22B288D86CE00C92578 /* Build configuration list for PBXNativeTarget "Calculator" */;
 			buildPhases = (
-				10D33538465098D546C34232 /* [CP] Check Pods Manifest.lock */,
 				CED2B210288D86CC00C92578 /* Sources */,
 				CED2B211288D86CC00C92578 /* Frameworks */,
 				CED2B212288D86CC00C92578 /* Resources */,
-				1F7E5F9D3471DA75289CF027 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -477,6 +466,15 @@
 			);
 			name = Calculator;
 			packageProductDependencies = (
+				CE90671F28FEBCCC0029832D /* FirebaseAuth */,
+				CE90672128FEBCCC0029832D /* FirebaseDatabase */,
+				CE90672328FEBCCC0029832D /* FirebaseFunctions */,
+				CE90672528FEBCCC0029832D /* FirebaseStorage */,
+				CE90672828FEBD4D0029832D /* Alamofire */,
+				CE90672B28FEBD860029832D /* RxDataSources */,
+				CE90672E28FEBDEF0029832D /* RxCocoa */,
+				CE90673028FEBDEF0029832D /* RxRelay */,
+				CE90673228FEBDEF0029832D /* RxSwift */,
 			);
 			productName = Calculator;
 			productReference = CED2B214288D86CC00C92578 /* Calculator.app */;
@@ -510,6 +508,10 @@
 			);
 			mainGroup = CED2B20B288D86CC00C92578;
 			packageReferences = (
+				CE90671E28FEBCCC0029832D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CE90672728FEBD4D0029832D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CE90672A28FEBD860029832D /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				CE90672D28FEBDEF0029832D /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = CED2B215288D86CC00C92578 /* Products */;
 			projectDirPath = "";
@@ -526,54 +528,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED2B227288D86CE00C92578 /* LaunchScreen.storyboard in Resources */,
+				CED01C8328F1F85B009033F4 /* Assets.xcassets in Resources */,
 				CED7CEA128BD00EE00AFEA49 /* GoogleService-Info.plist in Resources */,
-				CED2B224288D86CE00C92578 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		10D33538465098D546C34232 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Calculator-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1F7E5F9D3471DA75289CF027 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Calculator/Pods-Calculator-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Calculator/Pods-Calculator-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Calculator/Pods-Calculator-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CED2B210288D86CC00C92578 /* Sources */ = {
@@ -594,29 +554,30 @@
 				CED2B222288D86CC00C92578 /* Calculator.xcdatamodeld in Sources */,
 				CEFE5FDA2891853B007E7631 /* RegistrationCoordinator.swift in Sources */,
 				CED4EB7128947ECB008A39C6 /* FoodSelectedTableViewCell.swift in Sources */,
-				CE02435128D907A700DB83E2 /* MTView.swift in Sources */,
+				CE02435128D907A700DB83E2 /* EmptyView.swift in Sources */,
 				CE02435928D9BC9900DB83E2 /* Color.swift in Sources */,
 				CED2B242288D8A0400C92578 /* CoordinatorFinishDelegate.swift in Sources */,
+				CED01C7F28EEB9F6009033F4 /* SectionModels.swift in Sources */,
 				CED2B23B288D882E00C92578 /* NetworkAPI.swift in Sources */,
+				CE7E8BCA28F84D75005906CF /* UserInfoTableViewCell.swift in Sources */,
 				CEFE5FD82891796C007E7631 /* Strings.swift in Sources */,
 				CE114C1B28DCAD7C00F3DD6A /* LoginCoordinator.swift in Sources */,
 				CED2B218288D86CC00C92578 /* AppDelegate.swift in Sources */,
 				CED2B237288D87D800C92578 /* CustomError.swift in Sources */,
 				CE02435B28D9C0E300DB83E2 /* Image.swift in Sources */,
 				CED7CE9D28BCF39400AFEA49 /* AppUser.swift in Sources */,
-				CE1CBC9A289F9D8100859E0D /* SwitchTableViewCell.swift in Sources */,
 				CE114C2928E07A2000F3DD6A /* SecondViewController.swift in Sources */,
 				CECD077A2892CA0D00D5F637 /* BaseCoordinator.swift in Sources */,
 				CEDB352728A29F9500F0C532 /* AlertController.swift in Sources */,
-				CED4EB6D2893EFC7008A39C6 /* FoodSelectedModel.swift in Sources */,
 				CE114C3428E0837800F3DD6A /* TabCoordinator.swift in Sources */,
 				CED2B244288D8A1B00C92578 /* AppCoordinator.swift in Sources */,
 				CE114C2328DCB2DA00F3DD6A /* MainModuleViewController.swift in Sources */,
 				CEFE5FCD288FFD36007E7631 /* StartViewModel.swift in Sources */,
 				CE1CBC94289D80E600859E0D /* UserViewController.swift in Sources */,
+				CE114C3828E5F2E100F3DD6A /* CaloriesView.swift in Sources */,
+				CED01C8128F16B77009033F4 /* Ints and Floats.swift in Sources */,
 				CE114C1D28DCAEF200F3DD6A /* LoginViewController.swift in Sources */,
 				CE114C3628E0E14C00F3DD6A /* FoodDetailedCoordinator.swift in Sources */,
-				CED4EB6F2893F47F008A39C6 /* EmptyView.swift in Sources */,
 				CEFE5FD428917941007E7631 /* RegistrationViewController.swift in Sources */,
 				CED2B23D288D884A00C92578 /* NetworkService.swift in Sources */,
 				CE1CBC96289D80F500859E0D /* UserViewModel.swift in Sources */,
@@ -624,9 +585,7 @@
 				CED7CE9F28BCF55400AFEA49 /* FoodSelected.swift in Sources */,
 				CE114C1F28DCAF0800F3DD6A /* LoginViewModel.swift in Sources */,
 				CE114C3128E07D6900F3DD6A /* TabCoordinatorHelper.swift in Sources */,
-				CE1CBC9C289F9D9800859E0D /* ExitTableViewCell.swift in Sources */,
 				CED9229C289800C300F9832B /* TotalCaloriesView.swift in Sources */,
-				CE585C042892E25000AC2D70 /* LoadingView.swift in Sources */,
 				CED2B239288D87F100C92578 /* FoodModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,6 +608,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -702,6 +662,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -709,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -755,13 +717,12 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		CED2B22C288D86CE00C92578 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4FD5EC97B2BED4E5B372157 /* Pods-Calculator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -770,10 +731,14 @@
 				DEVELOPMENT_TEAM = PUN93UY7H6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Calculator/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Calculator;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortraitUpsideDown;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -790,7 +755,6 @@
 		};
 		CED2B22D288D86CE00C92578 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48C1EF4670911ECC1200713B /* Pods-Calculator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -799,10 +763,14 @@
 				DEVELOPMENT_TEAM = PUN93UY7H6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Calculator/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Calculator;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortraitUpsideDown;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -839,6 +807,89 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE90671E28FEBCCC0029832D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		CE90672728FEBD4D0029832D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		CE90672A28FEBD860029832D /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		CE90672D28FEBDEF0029832D /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE90671F28FEBCCC0029832D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90671E28FEBCCC0029832D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CE90672128FEBCCC0029832D /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90671E28FEBCCC0029832D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		CE90672328FEBCCC0029832D /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90671E28FEBCCC0029832D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		CE90672528FEBCCC0029832D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90671E28FEBCCC0029832D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		CE90672828FEBD4D0029832D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90672728FEBD4D0029832D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		CE90672B28FEBD860029832D /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90672A28FEBD860029832D /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
+		CE90672E28FEBDEF0029832D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90672D28FEBDEF0029832D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		CE90673028FEBDEF0029832D /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90672D28FEBDEF0029832D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		CE90673228FEBDEF0029832D /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE90672D28FEBDEF0029832D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CED2B220288D86CC00C92578 /* Calculator.xcdatamodeld */ = {

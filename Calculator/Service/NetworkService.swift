@@ -44,6 +44,7 @@ class NetworkService: NetworkAPI {
               
               observer.onError(reason)
             }
+//            errorSubject.onNext(error)
             observer.onError(error)
           }
           

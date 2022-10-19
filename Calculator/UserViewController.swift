@@ -7,24 +7,42 @@
 
 import UIKit
 import RxSwift
+import RxDataSources
 import Photos
 import PhotosUI
 
 class UserViewController: UIViewController {
-
-  var viewModel: UserViewModelProtocol!
   
-  private let loginButton = UIButton()
+  //MARK: - Public Properties
+
+  public var viewModel: UserViewModelProtocol!
+  
+  //MARK: - Private Properties
   
   private let loadingView = UIActivityIndicatorView(style: .large)
-  private let imageView = UIImageView()
-  private let profileLabel = UILabel()
+  
+  private let tableView = UITableView()
+  private var dataSource: RxTableViewSectionedReloadDataSource<ItemSection<AppUser>>?
   
   private let bag = DisposeBag()
+  
+  //MARK: - Life Cycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
+    dataSource = RxTableViewSectionedReloadDataSource<ItemSection<AppUser>>(configureCell: { (_, tableView, indexPath, model) -> UITableViewCell in
+      
+      if indexPath.row == 0 {
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: UserInfoTableViewCell.identifier, for: indexPath) as? UserInfoTableViewCell
+        
+        cell?.configure(with: model, and: self.viewModel)
+        return cell ?? UITableViewCell()
+      }
+      return UITableViewCell()
+    })
+    
     setup()
     setupBindings()
   }
@@ -33,85 +51,54 @@ class UserViewController: UIViewController {
     super.viewWillAppear(animated)
 
     viewModel.fetchData()
-    self.navigationController?.setNavigationBarHidden(true, animated: false)
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    
-    self.navigationController?.setNavigationBarHidden(false, animated: true)
   }
 
 }
 
 extension  UserViewController {
+  
+  //MARK: - Private Methods
 
   private func setup() {
 
     self.view.backgroundColor = .main
     
     addSubViews()
-    setuploginButton()
-    setupProfilePhotoImageView()
-    setupLabel()
+    setupTableView()
+    setupRightBarButtonItem()
     setupConstraints()
   }
 
   private func addSubViews() {
 
-    [loginButton, imageView, profileLabel, loadingView].forEach {
+    [tableView, loadingView].forEach {
 
       $0.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0)
     }
   }
-
-  private func setupProfilePhotoImageView() {
+  
+  private func setupTableView() {
     
-    imageView.clipsToBounds = true
-    imageView.isUserInteractionEnabled = true
+    tableView.separatorStyle = .none
+    tableView.backgroundColor = .main
+    tableView.register(UserInfoTableViewCell.self, forCellReuseIdentifier: UserInfoTableViewCell.identifier)
     
-    imageView.backgroundColor = .systemGray6
-    imageView.layer.cornerRadius = 100
-    imageView.contentMode = .scaleAspectFill
-    
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-    tapGestureRecognizer.numberOfTapsRequired = 1
-    
-    imageView.addGestureRecognizer(tapGestureRecognizer)
+    tableView.rx.rowHeight.onNext(350)
   }
   
-  private func setuploginButton() {
+  private func setupRightBarButtonItem() {
     
-    loginButton.setTitle(Strings.shared.loginButtonString, for: .normal)
-    loginButton.backgroundColor = .subMain
-    loginButton.setTitleColor(.white, for: .normal)
-    loginButton.layer.cornerRadius = 8.0
-    loginButton.addTarget(self, action: #selector(didLoginButtonTapped(_:)), for: .touchUpInside)
-  }
-  
-  private func setupLabel() {
-    
-    profileLabel.font = profileLabel.font.withSize(25)
-    profileLabel.textAlignment = .center
+    let rightBarItem = UIBarButtonItem(image: .logout, style: .plain, target: self, action: #selector(didRightBarButtonItemTapped))
+    self.navigationItem.setRightBarButton(rightBarItem, animated: true)
   }
 
   private func setupConstraints() {
     
-    loginButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
-    loginButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-    loginButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-    loginButton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
-    
-    imageView.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.size.width / 2).isActive = true
-    imageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.size.height / 4).isActive = true
-    imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-    imageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-    
-    profileLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
-    profileLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    profileLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-    profileLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+    tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     
     loadingView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -121,31 +108,28 @@ extension  UserViewController {
   
   private func setupBindings() {
     
-    viewModel.userNameSubject
-      .subscribe(onNext: { [weak self] userName in
-        self?.profileLabel.text = userName
-      })
+    guard let dataSource = dataSource else { return }
+    
+    viewModel.alertRelay
+      .subscribe { [weak self] bool in
+        guard bool == true else { return }
+        self?.setupAlert()
+      }
       .disposed(by: bag)
     
-    viewModel.userPhotoSubject
-      .subscribe(onNext: { [weak self] userPhoto in
-        self?.imageView.image = userPhoto
-      })
-      .disposed(by: bag)
+    viewModel.content.asDriver().drive(tableView.rx.items(dataSource: dataSource)).disposed(by: bag)
   }
   
-  @objc func imageTapped(_ sender: UITapGestureRecognizer) {
-     setupAlert()
-  }
-  
-  @objc private func didLoginButtonTapped(_ sender: Any) {
+  @objc private func didRightBarButtonItemTapped(_ sender: Any) {
     
-    viewModel.signOut()
+    loadingView.startAnimating()
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+      self?.viewModel.signOut {
+        self?.loadingView.stopAnimating()
+      }
+    }
   }
-  
-}
-
-extension UserViewController {
   
   private func setupAlert() {
     
@@ -172,7 +156,11 @@ extension UserViewController {
   
 }
 
+//MARK: - Extensions
+
 extension UserViewController: PHPickerViewControllerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+  
+  //MARK: - Private Methods
   
   @available(iOS 14.0, *)
   private func setupPHPicker() {
@@ -210,20 +198,5 @@ extension UserViewController: PHPickerViewControllerDelegate, UIImagePickerContr
     self.viewModel.getPhoto(photo: image)
     imagePicker.dismiss(animated: true)
   }
-  
-  //  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  //
-  //    if indexPath.row == 1 {
-  //      loadingView.startAnimating()
-  //      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-  //
-  //        self?.viewModel.signOut()
-  //        self?.loadingView.stopAnimating()
-  //      }
-  //    }
-  //  }
-  
-  
-  
   
 }

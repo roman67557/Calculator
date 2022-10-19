@@ -7,14 +7,22 @@
 
 import UIKit
 import FirebaseAuth
+import RxRelay
+import RxSwift
+
+var errorSubject = PublishSubject<Error?>()
 
 protocol AppCoordinatorProtocol: BaseCoordinator {
   
   func goToStart()
   func goToMain()
+  
+  func alertPresent()
 }
 
 class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
+  
+  private let bag = DisposeBag()
   
   init(navigationController: UINavigationController) {
     super.init()
@@ -35,6 +43,8 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
         self.goToStart()
       }
     }
+    
+    alertPresent()
   }
   
   func goToStart() {
@@ -68,6 +78,27 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
     }
     
     tabCoordinator.start()
+  }
+  
+}
+
+extension AppCoordinator {
+  
+  func alertPresent() {
+    
+    errorSubject
+      .subscribe(onNext: { [weak self] error in
+        
+        let alert = AlertController(title: Strings.shared.error, message: error?.localizedDescription, preferredStyle: .alert)
+        
+        if self?.navigationController.presentedViewController == nil {
+          self?.navigationController.present(alert, animated: true)
+        }
+        else {
+          self?.navigationController.presentedViewController?.present(alert, animated: true)
+        }
+      })
+      .disposed(by: bag)
   }
   
 }
