@@ -26,13 +26,11 @@ class StartCoordinator: BaseCoordinator, StartCoordinatorProtocol {
   }
   
   override func start() {
-    
     let view = StartViewController()
     
     view.viewModel = {
-      
       let viewModel = StartViewModel()
-      
+        
       viewModel.registrationButtonRelay
         .subscribe({ _ in self.goToRegistration() })
         .disposed(by: bag)
@@ -51,7 +49,6 @@ class StartCoordinator: BaseCoordinator, StartCoordinatorProtocol {
   deinit {
     print("Start Coordinator deinit")
   }
-  
 }
 
 extension StartCoordinator {

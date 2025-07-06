@@ -58,6 +58,7 @@ struct Common: Codable {
 }
 
 // MARK: - SelfElement
+
 struct SelfElement: Codable {
   let foodName, servingUnit: String?
   let nixBrandID: JSONNull?
@@ -106,18 +107,14 @@ class JSONNull: Codable, Hashable {
 }
 
 extension Common: Equatable {
-  
   static func == (lhs: Common, rhs: Common) -> Bool {
-    
-    return lhs.foodName == rhs.foodName
+    lhs.foodName == rhs.foodName
   }
   
 }
 
 extension Common: Hashable {
-  
   func hash(into hasher: inout Hasher) {
-    
     hasher.combine(foodName)
   }
   

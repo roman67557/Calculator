@@ -21,7 +21,6 @@ protocol AppCoordinatorProtocol: BaseCoordinator {
 }
 
 class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
-  
   private let bag = DisposeBag()
   
   init(navigationController: UINavigationController) {
@@ -32,9 +31,6 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
   }
   
   override func start() {
-    
-    print("App Coordinator init")
-    
     Auth.auth().addStateDidChangeListener { auth, user in
 
       if user != nil {
@@ -48,13 +44,10 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
   }
   
   func goToStart() {
-    
     let startCoordinator = StartCoordinator(navigationController: navigationController)
     self.add(childCoordinator: startCoordinator)
-
     
     startCoordinator.isCompleted = { [weak self, weak startCoordinator] in
-      
       guard let coordinator = startCoordinator else { return }
       self?.remove(childCoordinator: coordinator)
     }
@@ -72,23 +65,19 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorProtocol {
     navigationController.setNavigationBarHidden(true, animated: false)
     
     tabCoordinator.isCompleted = { [weak self, weak tabCoordinator] in
-      
       guard let coordinator = tabCoordinator else { return }
       self?.remove(childCoordinator: coordinator)
     }
     
     tabCoordinator.start()
   }
-  
 }
 
 extension AppCoordinator {
   
   func alertPresent() {
-    
     errorSubject
       .subscribe(onNext: { [weak self] error in
-        
         let alert = AlertController(title: Strings.shared.error, message: error?.localizedDescription, preferredStyle: .alert)
         
         if self?.navigationController.presentedViewController == nil {
@@ -100,5 +89,4 @@ extension AppCoordinator {
       })
       .disposed(by: bag)
   }
-  
 }

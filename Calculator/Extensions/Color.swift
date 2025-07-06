@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIColor {
-  
   static let main = UIColor(named: "mainColor")
   static let mainReversed = UIColor(named: "mainReversedColor")
   static let subMain = UIColor(named: "loginButtonColor")

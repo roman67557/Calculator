@@ -13,7 +13,6 @@ var foodSelectedSubject = PublishSubject<[FoodSelected]>()
 var foodSelectedModel = [FoodSelected]()
 
 struct FoodSelected {
-  
   let ref: DatabaseReference?
   
   let brandName: String?

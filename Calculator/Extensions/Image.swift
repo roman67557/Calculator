@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIImage {
-  
   static let searchFood = UIImage(named: "search")
   static let searchFoodTapped = UIImage(named: "searchTapped")
   

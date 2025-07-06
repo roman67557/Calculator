@@ -29,11 +29,8 @@ class MainModuleCoordinator: BaseCoordinator, MainModuleCoordinatorProtocol {
     let view = MainModuleViewController()
     
     view.viewModel = {
-      
-      let viewModel = MainViewModel()
       let networkService = NetworkService()
-      
-      viewModel.networkService = networkService
+      let viewModel = MainViewModel(networkService: networkService)
       
       viewModel.goSubject
         .map { [weak self] branded in

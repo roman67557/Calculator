@@ -27,7 +27,6 @@ class TotalCaloriesView: UIView {
   }
   
   private func setup() {
-    
     addSubViews()
     setupTotalLabel()
     setupCaloriesLabel()
@@ -35,30 +34,25 @@ class TotalCaloriesView: UIView {
   }
   
   private func addSubViews() {
-    
     [totalLabel, caloriesLabel].forEach {
-      
       $0.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview($0)
     }
   }
   
   private func setupTotalLabel() {
-    
     totalLabel.font = .systemFont(ofSize: 20)
     totalLabel.text = Strings.shared.caloriesSum
     totalLabel.textAlignment = .left
   }
   
   private func setupCaloriesLabel() {
-    
     caloriesLabel.font = .systemFont(ofSize: 20)
 //    caloriesLabel.text = "\(caloriesSum ?? 0)"
     caloriesLabel.textAlignment = .right
   }
   
   private func setupConstraints() {
-    
     totalLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     totalLabel.trailingAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     totalLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -73,14 +67,11 @@ class TotalCaloriesView: UIView {
 }
 
 extension TotalCaloriesView {
-
-  public func configure(viewModel: SecondViewModelProtocol) {
-    
-    viewModel.caloriesSumSubject
-      .subscribe(onNext: { [weak self] sum in
+  func configure(viewModel: SecondViewModelProtocol) {
+      viewModel.caloriesSum.asObservable()
+        .subscribe(onNext: { [weak self] (sum: Int) in
         self?.caloriesLabel.text = "\(sum)"
       })
       .disposed(by: bag)
   }
-
 }

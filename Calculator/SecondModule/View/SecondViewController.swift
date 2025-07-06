@@ -43,7 +43,7 @@ class SecondViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+
     viewModel.fetchData()
     self.navigationController?.setNavigationBarHidden(true, animated: false)
   }
@@ -57,7 +57,6 @@ class SecondViewController: UIViewController {
   //MARK: - Private Methods
   
   private func setup() {
-    
     tableView.isHidden = false
     totalCaloriesView.isHidden = false
     loadingView.isHidden = false
@@ -71,9 +70,7 @@ class SecondViewController: UIViewController {
   }
   
   private func addSubViews() {
-    
     [tableView, emptyView, loadingView, totalCaloriesView].forEach {
-      
       $0.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0)
     }
@@ -84,12 +81,10 @@ class SecondViewController: UIViewController {
 }
   
   private func setupTotalCaloriesView() {
-
     totalCaloriesView.configure(viewModel: viewModel)
   }
   
   private func setupTableView() {
-    
     tableView.separatorStyle = .none
     tableView.backgroundColor = .main
     tableView.register(FoodSelectedTableViewCell.self, forCellReuseIdentifier: FoodSelectedTableViewCell.identifier)
@@ -98,7 +93,6 @@ class SecondViewController: UIViewController {
   }
   
   private func setupConstraints() {
-    
     tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -121,28 +115,27 @@ class SecondViewController: UIViewController {
   }
   
   private func setupBindings() {
-    
     viewModel.empty
       .drive(emptyView.rx.isHidden)
       .disposed(by: bag)
     
     viewModel.isLoading
-      .map({ !$0 })
+      .map { !$0 }
       .drive(loadingView.rx.isHidden)
       .disposed(by: bag)
     
     viewModel.isLoading
-      .map({ !$0 })
+      .map { !$0 }
       .drive(loadingView.rx.isAnimating)
       .disposed(by: bag)
     
     viewModel.empty
-      .map({ !$0 })
+      .map { !$0 }
       .drive(totalCaloriesView.rx.isHidden)
       .disposed(by: bag)
     
     viewModel.empty
-      .map({ !$0 })
+      .map { !$0 }
       .drive(tableView.rx.isHidden)
       .disposed(by: bag)
     

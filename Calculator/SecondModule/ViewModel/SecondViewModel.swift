@@ -13,22 +13,10 @@ import FirebaseDatabase
 //MARK: - Protocol
 
 protocol SecondViewModelProtocol {
-  
-  //MARK: - Properties
-  
-  var loadingSubject: PublishSubject<Bool> { get }
   var isLoading: Driver<Bool> { get }
-  
-  var emptySubject: PublishSubject<Bool> { get }
   var empty: Driver<Bool> { get }
-  
-  var contentSubject: BehaviorSubject<[ItemSection<FoodSelected>]> { get }
   var content: Driver<[ItemSection<FoodSelected>]> { get }
-  
-  var caloriesSumSubject: PublishSubject<Int> { get }
   var caloriesSum: Driver<Int> { get }
-  
-  //MARK: - Methods
   
   func fetchData()
   func deleteData(text: String)
@@ -37,9 +25,7 @@ protocol SecondViewModelProtocol {
 //MARK: - View Model
 
 class SecondViewModel: SecondViewModelProtocol {
-  
-  //MARK: - Properties
-  
+  // Internal
   var loadingSubject = PublishSubject<Bool>()
   var isLoading: Driver<Bool> {
     return loadingSubject.asDriver(onErrorJustReturn: false)
@@ -60,8 +46,7 @@ class SecondViewModel: SecondViewModelProtocol {
     return caloriesSumSubject.asDriver(onErrorDriveWith: .empty())
   }
   
-  //MARK: - Private Properties
-  
+  // Private
   private var user: AppUser?
   private var ref: DatabaseReference?
   
@@ -70,7 +55,6 @@ class SecondViewModel: SecondViewModelProtocol {
   //MARK: - Initializers
   
   init() {
-    
     guard let currentUser = Auth.auth().currentUser else { return }
     user = AppUser(user: currentUser)
     guard let userId = user?.uid else { return }
@@ -82,7 +66,6 @@ class SecondViewModel: SecondViewModelProtocol {
   //MARK: - Private Methods
   
   private func output() {
-    
     foodSelectedSubject
       .map({ [weak self] elements -> [ItemSection<FoodSelected>] in
         var sections: [ItemSection<FoodSelected>] = []
@@ -91,14 +74,11 @@ class SecondViewModel: SecondViewModelProtocol {
           self?.emptySubject.onNext(false)
           self?.loadingSubject.onNext(true)
         } else {
-          
           self?.emptySubject.onNext(true)
           self?.loadingSubject.onNext(true)
           
           var caloriesSum = 0
-          
           elements.forEach { element in
-            
             let section = ItemSection(header: "", items: [element])
             
             caloriesSum += element.calories ?? 0
@@ -108,6 +88,7 @@ class SecondViewModel: SecondViewModelProtocol {
           self?.caloriesSumSubject.onNext(caloriesSum)
           self?.contentSubject.onNext(sections)
         }
+
         return sections
       })
       .subscribe()
@@ -117,7 +98,6 @@ class SecondViewModel: SecondViewModelProtocol {
   //MARK: - Public Methods
   
   public func fetchData() {
-    
     ref?.observe(.value, with: { snapshot in
       var foodSelected = [FoodSelected]()
       for item in snapshot.children {
@@ -130,9 +110,7 @@ class SecondViewModel: SecondViewModelProtocol {
   }
   
   public func deleteData(text: String) {
-
     ref?.child(text).removeValue()
     self.fetchData()
   }
-  
 }

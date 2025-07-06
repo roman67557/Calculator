@@ -23,13 +23,14 @@ class MainModuleViewController: UIViewController {
   private let emptyView = EmptyView(text: Strings.shared.nothingHaveFound)
   
   private var tableView = UITableView()
-  private let dataSource = RxTableViewSectionedReloadDataSource<ItemSection<Branded>>(configureCell: { _, tableView, indexPath, model -> UITableViewCell in
-    
-    let cell = tableView.dequeueReusableCell(withIdentifier: FoodTableViewCell.identifier, for: indexPath) as? FoodTableViewCell
-    
-    cell?.configure(with: model)
-    return cell ?? UITableViewCell()
-  })
+    private let dataSource = RxTableViewSectionedReloadDataSource<ItemSection<Branded>>(
+        configureCell: { _, tableView, indexPath, model -> UITableViewCell in
+            let cell = tableView.dequeueReusableCell(withIdentifier: FoodTableViewCell.identifier, for: indexPath) as? FoodTableViewCell
+
+            cell?.configure(with: model)
+            return cell ?? UITableViewCell()
+        }
+    )
   
   private let bag = DisposeBag()
   
@@ -45,7 +46,6 @@ class MainModuleViewController: UIViewController {
   //MARK: - Private Methods
   
   private func setup() {
-    
     viewModel.setupUser()
     
     addSubViews()
@@ -57,7 +57,6 @@ class MainModuleViewController: UIViewController {
   }
   
   private func addSubViews() {
-    
     [tableView, loadingView, emptyView].forEach {
       $0?.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview($0 ?? UIView())
@@ -69,14 +68,12 @@ class MainModuleViewController: UIViewController {
   }
   
   private func setupHiddenViews() {
-    
     tableView.isHidden = false
     emptyView.isHidden = true
     loadingView?.isHidden = true
   }
   
   private func setupSearchBar() {
-    
     navigationItem.titleView = searchBar
     searchBar.delegate = self
     searchBar.placeholder = "Введите название продукта..."
@@ -84,7 +81,6 @@ class MainModuleViewController: UIViewController {
   }
   
   private func setupTableView() {
-    
     tableView.keyboardDismissMode = .onDrag
     tableView.separatorStyle = .none
     tableView.backgroundColor = .main
@@ -94,7 +90,6 @@ class MainModuleViewController: UIViewController {
   }
   
   private func setupConstraints() {
-    
     tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive  = true
     tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -112,10 +107,13 @@ class MainModuleViewController: UIViewController {
   }
   
   private func setupBindings() {
-    
-    searchBar.rx.text.orEmpty.bind(to: self.viewModel.searchObserver).disposed(by: bag)
-    
-    viewModel.isLoading.asDriver().drive(tableView.rx.isHidden).disposed(by: bag)
+      searchBar.rx.text.orEmpty
+          .bind(to: viewModel.searchObserver)
+          .disposed(by: bag)
+      
+    viewModel.isLoading.asDriver()
+          .drive(tableView.rx.isHidden)
+          .disposed(by: bag)
     
     viewModel.error
       .map({ $0 != nil })
@@ -123,7 +121,6 @@ class MainModuleViewController: UIViewController {
       .disposed(by: bag)
     
     if let loadingView = loadingView {
-      
       viewModel.isLoading
         .drive(loadingView.rx.isAnimating)
         .disposed(by: bag)
@@ -143,6 +140,12 @@ class MainModuleViewController: UIViewController {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: bag)
     
+      tableView.rx.itemSelected
+          .subscribe { [weak self] indexPath in
+              self?.tableView.deselectRow(at: indexPath, animated: true)
+          }
+          .disposed(by: bag)
+    
     tableView.rx.modelSelected(Branded.self)
       .map { [weak self] branded in
         self?.viewModel.goToDetailed(model: branded)
@@ -150,7 +153,6 @@ class MainModuleViewController: UIViewController {
       .subscribe()
       .disposed(by: bag)
   }
-  
 }
 
 //MARK: - Extensions
@@ -160,7 +162,6 @@ extension MainModuleViewController: UISearchBarDelegate {
   //MARK: - Methods
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
     self.view.endEditing(true)
     self.emptyView.endEditing(true)
     self.tableView.endEditing(true)
@@ -168,9 +169,6 @@ extension MainModuleViewController: UISearchBarDelegate {
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    
     searchBar.endEditing(true)
   }
-  
 }
-
